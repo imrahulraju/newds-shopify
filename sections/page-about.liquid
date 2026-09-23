@@ -1,4 +1,19 @@
-<section class="about-page section">
+<section class="about-page section{% if section.settings.bg_image != blank %} has-bg-image{% endif %}" style="{% if section.settings.bg_image != blank %}background-image: url('{{ section.settings.bg_image | image_url: width: 2000 }}');{% elsif section.settings.bg_color != blank %}background-color: {{ section.settings.bg_color }};{% endif %}">
+  {% if section.settings.bg_image != blank and section.settings.bg_overlay_opacity > 0 %}
+    <div class="section-bg-overlay" style="background-color: {{ section.settings.bg_overlay_color | default: '#ffffff' }}; opacity: {{ section.settings.bg_overlay_opacity | divided_by: 100.0 }};"></div>
+  {% endif %}
+  {% if section.settings.banner_image != blank %}
+    <div class="about-page__banner-wrapper" style="margin-bottom: var(--spacing-lg); max-width: 1200px; margin-left: auto; margin-right: auto; border-radius: var(--radius-md); overflow: hidden;">
+      <img
+        src="{{ section.settings.banner_image | image_url: width: 1400 }}"
+        alt="{{ page.title | default: 'About ElyvaraCo' }}"
+        width="1400"
+        height="600"
+        style="width: 100%; height: auto; display: block; max-height: 480px; object-fit: cover;"
+        loading="lazy"
+      >
+    </div>
+  {% endif %}
   <div class="container container--narrow">
     <div class="about-page__header">
       <span class="about-page__subtitle">OUR STORY</span>
@@ -28,6 +43,42 @@
 {% schema %}
 {
   "name": "About Page",
-  "settings": []
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Hero Story Banner Image"
+    },
+    {
+      "type": "header",
+      "content": "Background & Style"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color"
+    },
+    {
+      "type": "range",
+      "id": "bg_overlay_opacity",
+      "label": "Overlay Opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "default": 10,
+      "unit": "%"
+    },
+    {
+      "type": "color",
+      "id": "bg_overlay_color",
+      "label": "Overlay Color",
+      "default": "#ffffff"
+    }
+  ]
 }
 {% endschema %}

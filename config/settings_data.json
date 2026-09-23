@@ -50,7 +50,10 @@
           "brand_desc": "Discover curated collections of ethically sourced, artisanal fine jewelry. Each piece tells a story of timeless beauty.",
           "contact_email": "info@elyvaraco.com",
           "menu_left": "",
-          "show_payment_icons": true
+          "show_payment_icons": true,
+          "bg_image": "shopify://shop_images/File_258_2.webp",
+          "bg_overlay_opacity": 75,
+          "bg_overlay_color": "#0f0f0f"
         }
       },
       "announcement-bar": {
@@ -69,7 +72,10 @@
       },
       "collection-banner": {
         "type": "collection-banner",
-        "settings": {}
+        "settings": {
+          "bg_image": "shopify://shop_images/Frame_1_1.png",
+          "overlay_opacity": 35
+        }
       },
       "collection-template": {
         "type": "collection-template",
