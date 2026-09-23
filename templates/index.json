@@ -15,11 +15,9 @@
         "slide_ePjmri": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/Frame_1_1.png",
-            "mobile_image": "shopify://shop_images/ChatGPT_Image_Aug_20_2026_11_49_23_PM.png",
-            "subtitle": "",
-            "heading": "",
-            "text": "",
+            "subtitle": "Newds",
+            "heading": "welcome text",
+            "text": "welcome discription",
             "button_text": "",
             "button_link": "shopify://collections",
             "text_position": "left"
@@ -42,9 +40,10 @@
         "line_2": "The detail that feels effortlessly luxurious.",
         "line_3": "The piece your friends notice first — without you saying a word.\n\nThat’s what we design for.",
         "closing_text": "ELYVARA — Fashion Jewelry, made to be noticed.",
-        "bg_image": "shopify://shop_images/File_258_2.webp",
+        "bg_color": "",
         "bg_overlay_opacity": 25,
-        "bg_overlay_color": "#ffffff"
+        "bg_overlay_color": "#ffffff",
+        "text_color": ""
       }
     },
     "category-grid": {
@@ -53,7 +52,6 @@
         "category_TiVb7r": {
           "type": "category",
           "settings": {
-            "image": "shopify://shop_images/Loma_Studs_Earring.webp",
             "title": "Earrings",
             "link": ""
           }
@@ -61,7 +59,6 @@
         "category_87t97j": {
           "type": "category",
           "settings": {
-            "image": "shopify://shop_images/Lily_Clover_Necklace_Bracelet_Set_Front_View..webp",
             "title": "Nacklace",
             "link": ""
           }
@@ -69,7 +66,6 @@
         "category_k6CHUE": {
           "type": "category",
           "settings": {
-            "image": "shopify://shop_images/billi_EAR_CUFF.webp",
             "title": "Rings",
             "link": ""
           }
@@ -77,7 +73,6 @@
         "category_p4Yar7": {
           "type": "category",
           "settings": {
-            "image": "shopify://shop_images/Eye_of_Grace_BANGLE_Variant_View_Gold_Silver..webp",
             "title": "Bracelets",
             "link": ""
           }
@@ -85,7 +80,6 @@
         "category_EmhAAF": {
           "type": "category",
           "settings": {
-            "image": "shopify://shop_images/IMG-20250731-WA0021.webp",
             "title": "Accessories",
             "link": "shopify://collections/accessories"
           }
@@ -106,7 +100,7 @@
         "show_view_all": true,
         "view_all_text": "View All",
         "view_all_link": "",
-        "bg_image": "shopify://shop_images/2150347075.jpg",
+        "bg_color": "",
         "bg_overlay_opacity": 15,
         "bg_overlay_color": "#ffffff"
       }
@@ -121,7 +115,7 @@
         "show_sale_badge": true,
         "show_view_all": true,
         "button_label": "EXPLORE NEW",
-        "bg_image": "shopify://shop_images/Frame_1.png",
+        "bg_color": "",
         "bg_overlay_opacity": 10,
         "bg_overlay_color": "#ffffff"
       }
@@ -129,13 +123,11 @@
     "free-gift-promo": {
       "type": "free-gift-promo",
       "settings": {
-        "image": "shopify://shop_images/WhatsApp_Image_2026-07-19_at_7.40.25_AM_1.png",
         "title": "A SPECIAL GIFT AWAITS",
         "description": "<p>Enjoy a <strong>complimentary surprise gift</strong> and <strong>FREE shipping</strong> when you spend <strong>$100 USD or more</strong>.</p><p>Every qualifying order is carefully packed with an exclusive gift—our way of saying thank you for choosing ElyvaraCo.</p>",
         "button_text": "SHOP NOW & CLAIM YOUR GIFT",
         "button_link": "",
         "bg_color": "#f9f7f4",
-        "bg_image": "shopify://shop_images/File_258_2.webp",
         "bg_overlay_opacity": 20,
         "bg_overlay_color": "#f9f7f4"
       }
@@ -143,7 +135,6 @@
     "image-with-text": {
       "type": "image-with-text",
       "settings": {
-        "image": "shopify://shop_images/2151992036.jpg",
         "layout": "left",
         "subtitle": "STYLE THAT STAYS WITH YOU",
         "title": "",
@@ -151,7 +142,6 @@
         "button_label": "SHOP THE COLLECTION",
         "button_link": "shopify://collections",
         "bg_color": "#ffffff",
-        "bg_image": "shopify://shop_images/37_3.webp",
         "bg_overlay_opacity": 15,
         "bg_overlay_color": "#ffffff"
       }
@@ -167,7 +157,7 @@
         "show_sale_badge": true,
         "show_view_all": true,
         "button_label": "EXPLORE NEW",
-        "bg_image": "shopify://shop_images/Frame_1.png",
+        "bg_color": "",
         "bg_overlay_opacity": 10,
         "bg_overlay_color": "#ffffff"
       }
@@ -183,7 +173,7 @@
         "columns": "4",
         "show_view_all": true,
         "show_sale_badge": true,
-        "bg_image": "shopify://shop_images/2150347075.jpg",
+        "bg_color": "",
         "bg_overlay_opacity": 15,
         "bg_overlay_color": "#ffffff"
       }
@@ -229,7 +219,7 @@
         "columns": "3",
         "show_tabs": true,
         "show_view_all": true,
-        "bg_image": "shopify://shop_images/File_258_2.webp",
+        "bg_color": "",
         "bg_overlay_opacity": 15,
         "bg_overlay_color": "#f9f7f4"
       }
@@ -237,7 +227,6 @@
     "parallax-banner": {
       "type": "parallax-banner",
       "settings": {
-        "image": "shopify://shop_images/File_258_2.webp",
         "heading": "THE JOY BEGINS BEFORE YOU OPEN IT",
         "text": "<p>There's something magical about opening a beautifully wrapped package—or watching someone else experience that excitement.</p><p>That's why every ElyvaraCo order is carefully packaged and ready to gift, with no extra fees or special requests.</p>",
         "button_text": "",
@@ -252,7 +241,6 @@
         "slide_1": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/2151992036.jpg",
             "brand_name": "ELYVARACO",
             "star_rating": 5,
             "author": "Mea Lee",
@@ -265,7 +253,6 @@
         "slide_2": {
           "type": "slide",
           "settings": {
-            "image": "shopify://shop_images/39_1.webp",
             "brand_name": "ELYVARACO",
             "star_rating": 5,
             "author": "Sarah M.",
@@ -286,7 +273,7 @@
         "attribution": "and she bought it for herself.",
         "autoplay": true,
         "autoplay_speed": 5,
-        "bg_image": "shopify://shop_images/File_258_2.webp",
+        "bg_color": "",
         "bg_overlay_opacity": 15,
         "bg_overlay_color": "#ffffff"
       }
@@ -327,8 +314,7 @@
       "settings": {
         "title": "SHOP OUR LOOKS",
         "subtitle": "<p>Some pieces come back. Some don't.</p><p>The ones that don't — people ask about them for months.</p>",
-        "image": "shopify://shop_images/File_258_2.webp",
-        "bg_image": "shopify://shop_images/37_3.webp",
+        "bg_color": "",
         "bg_overlay_opacity": 10,
         "bg_overlay_color": "#ffffff"
       }
@@ -374,7 +360,6 @@
       ],
       "settings": {
         "bg_color": "#ffffff",
-        "bg_image": "shopify://shop_images/File_258_2.webp",
         "bg_overlay_opacity": 20,
         "bg_overlay_color": "#ffffff"
       }
@@ -386,7 +371,6 @@
           "type": "collection",
           "settings": {
             "collection": "jewelry",
-            "image": "shopify://shop_images/Loma_Studs_Earring_845262b2-01f1-492d-9977-f3198ae511b4.webp",
             "title": "",
             "subheading": "18K GOLD PLATED"
           }
@@ -395,7 +379,6 @@
           "type": "collection",
           "settings": {
             "collection": "",
-            "image": "shopify://shop_images/File_258_2.webp",
             "title": "",
             "subheading": "18K GOLD PLATED"
           }
@@ -404,7 +387,6 @@
           "type": "collection",
           "settings": {
             "collection": "accessories",
-            "image": "shopify://shop_images/IMG-20250731-WA0021.webp",
             "title": "",
             "subheading": "18K GOLD PLATED"
           }
@@ -413,7 +395,6 @@
           "type": "collection",
           "settings": {
             "collection": "nee-products",
-            "image": "shopify://shop_images/2150347075.jpg",
             "title": "",
             "subheading": "18K GOLD PLATED"
           }
@@ -430,7 +411,7 @@
         "subtitle": "",
         "columns": "3",
         "show_count": false,
-        "bg_image": "shopify://shop_images/2150347075.jpg",
+        "bg_color": "",
         "bg_overlay_opacity": 15,
         "bg_overlay_color": "#ffffff"
       }
@@ -444,9 +425,7 @@
             "rating": 5,
             "text": "Super happy with my order, definitely worth it.",
             "author": "Savanna Chan",
-            "verified": true,
-            "author_image": "shopify://shop_images/37_3.webp",
-            "product_image": "shopify://shop_images/Lily_Clover_Necklace_Bracelet_Set_Front_View..webp"
+            "verified": true
           }
         },
         "review_kc4QDJ": {
@@ -455,9 +434,7 @@
             "rating": 5,
             "text": "The shine and craftsmanship exceeded my expectations. Beautiful packaging too!",
             "author": "Jessica T.",
-            "verified": true,
-            "author_image": "shopify://shop_images/39_1.webp",
-            "product_image": "shopify://shop_images/Loma_Studs_Earring.webp"
+            "verified": true
           }
         },
         "review_j6JiDx": {
@@ -466,9 +443,7 @@
             "rating": 5,
             "text": "Got so many compliments wearing this out. Will definitely be ordering more.",
             "author": "Elena R.",
-            "verified": true,
-            "author_image": "shopify://shop_images/no-need-text.png",
-            "product_image": "shopify://shop_images/Eye_of_Grace_BANGLE_Variant_View_Gold_Silver..webp"
+            "verified": true
           }
         }
       },
@@ -485,7 +460,6 @@
         "overall_rating": "4.9",
         "review_count": "2,847",
         "bg_color": "#f9f7f4",
-        "bg_image": "shopify://shop_images/File_258_2.webp",
         "bg_overlay_opacity": 15,
         "bg_overlay_color": "#f9f7f4"
       }
@@ -496,7 +470,6 @@
         "image_mkELr6": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/2151992036.jpg",
             "link": "https://www.instagram.com/____elyvara_official?igsh=MXgxbXJtdnl4eDN5Yw%3D%3D&utm_source=qr",
             "show_play_icon": false
           }
@@ -504,7 +477,6 @@
         "image_QWfyry": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/39_1.webp",
             "link": "",
             "show_play_icon": false
           }
@@ -512,7 +484,6 @@
         "image_M8BJa3": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/IMG-20250731-WA0021.webp",
             "link": "",
             "show_play_icon": false
           }
@@ -520,7 +491,6 @@
         "image_t3NMKY": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/no-need-text.png",
             "link": "",
             "show_play_icon": false
           }
@@ -528,7 +498,6 @@
         "image_7XjBa6": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/37_3.webp",
             "link": "",
             "show_play_icon": false
           }
@@ -536,7 +505,6 @@
         "image_P7Bmea": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Frame_1.png",
             "link": "",
             "show_play_icon": false
           }
@@ -553,7 +521,7 @@
       "settings": {
         "title": "@elyvaraco",
         "subtitle": "Follow us on Instagram",
-        "bg_image": "shopify://shop_images/2150347075.jpg",
+        "bg_color": "",
         "bg_overlay_opacity": 15,
         "bg_overlay_color": "#ffffff"
       }
@@ -569,7 +537,6 @@
         "success_message": "Thank you for subscribing!",
         "disclaimer": "By subscribing you agree to our terms & privacy policy.",
         "bg_color": "#ffffff",
-        "bg_image": "shopify://shop_images/File_258_2.webp",
         "bg_overlay_opacity": 25,
         "bg_overlay_color": "#ffffff"
       }
