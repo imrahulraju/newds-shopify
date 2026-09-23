@@ -32,13 +32,13 @@
       "header": {
         "type": "header",
         "custom_css": [
-          ".header__logo-img {height: 74px; width: auto;}",
+          ".header__logo-img {height: 34px; width: auto;}",
           ".header {background: #fef9f9;}"
         ],
         "settings": {
-          "logo": "shopify://shop_images/image_2_1.png",
+          "logo": "shopify://shop_images/logo-newds.svg",
           "logo_width": 80,
-          "menu": "main-menu-v2",
+          "menu": "",
           "sticky_header": true
         }
       },
@@ -51,7 +51,7 @@
           "contact_email": "info@elyvaraco.com",
           "menu_left": "",
           "show_payment_icons": true,
-          "bg_image": "shopify://shop_images/File_258_2.webp",
+          "bg_color": "",
           "bg_overlay_opacity": 75,
           "bg_overlay_color": "#0f0f0f"
         }
@@ -63,7 +63,9 @@
           "text": "Free U.S. Shipping on Orders Over $100 🇺🇸",
           "link": "",
           "bg_color": "#f5f0eb",
-          "text_color": "#333333"
+          "text_color": "#333333",
+          "bg_overlay_opacity": 10,
+          "bg_overlay_color": "#000000"
         }
       },
       "list-collections-template": {
