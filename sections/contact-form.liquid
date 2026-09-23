@@ -1,4 +1,7 @@
-<section class="contact-section section">
+<section class="contact-section section{% if section.settings.bg_image != blank %} has-bg-image{% endif %}" style="{% if section.settings.bg_image != blank %}background-image: url('{{ section.settings.bg_image | image_url: width: 2000 }}');{% elsif section.settings.bg_color != blank %}background-color: {{ section.settings.bg_color }};{% endif %}">
+  {% if section.settings.bg_image != blank and section.settings.bg_overlay_opacity > 0 %}
+    <div class="section-bg-overlay" style="background-color: {{ section.settings.bg_overlay_color | default: '#ffffff' }}; opacity: {{ section.settings.bg_overlay_opacity | divided_by: 100.0 }};"></div>
+  {% endif %}
   <div class="container container--narrow">
     <div class="contact-header">
       <h1 class="contact-title">{{ section.settings.heading | default: page.title | default: 'CONTACT' }}</h1>
@@ -100,6 +103,36 @@
       "id": "description",
       "label": "Description",
       "default": "Have a question or need assistance? Whether it's about your order, our collections, jewellery care, or business collaborations, the ElyvaraCo team is ready to help. We aim to provide friendly, timely support and ensure every experience with us is exceptional."
+    },
+    {
+      "type": "header",
+      "content": "Background & Style"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color"
+    },
+    {
+      "type": "range",
+      "id": "bg_overlay_opacity",
+      "label": "Overlay Opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "default": 10,
+      "unit": "%"
+    },
+    {
+      "type": "color",
+      "id": "bg_overlay_color",
+      "label": "Overlay Color",
+      "default": "#ffffff"
     }
   ]
 }

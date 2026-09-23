@@ -41,7 +41,10 @@
         "line_1": "The perfect piece that completes your look.",
         "line_2": "The detail that feels effortlessly luxurious.",
         "line_3": "The piece your friends notice first — without you saying a word.\n\nThat’s what we design for.",
-        "closing_text": "ELYVARA — Fashion Jewelry, made to be noticed."
+        "closing_text": "ELYVARA — Fashion Jewelry, made to be noticed.",
+        "bg_image": "shopify://shop_images/File_258_2.webp",
+        "bg_overlay_opacity": 25,
+        "bg_overlay_color": "#ffffff"
       }
     },
     "category-grid": {
@@ -102,7 +105,10 @@
         "columns": "5",
         "show_view_all": true,
         "view_all_text": "View All",
-        "view_all_link": ""
+        "view_all_link": "",
+        "bg_image": "shopify://shop_images/2150347075.jpg",
+        "bg_overlay_opacity": 15,
+        "bg_overlay_color": "#ffffff"
       }
     },
     "new-arrivals": {
@@ -114,7 +120,10 @@
         "products_to_show": 8,
         "show_sale_badge": true,
         "show_view_all": true,
-        "button_label": "EXPLORE NEW"
+        "button_label": "EXPLORE NEW",
+        "bg_image": "shopify://shop_images/Frame_1.png",
+        "bg_overlay_opacity": 10,
+        "bg_overlay_color": "#ffffff"
       }
     },
     "free-gift-promo": {
@@ -125,7 +134,10 @@
         "description": "<p>Enjoy a <strong>complimentary surprise gift</strong> and <strong>FREE shipping</strong> when you spend <strong>$100 USD or more</strong>.</p><p>Every qualifying order is carefully packed with an exclusive gift—our way of saying thank you for choosing ElyvaraCo.</p>",
         "button_text": "SHOP NOW & CLAIM YOUR GIFT",
         "button_link": "",
-        "bg_color": "#f9f7f4"
+        "bg_color": "#f9f7f4",
+        "bg_image": "shopify://shop_images/File_258_2.webp",
+        "bg_overlay_opacity": 20,
+        "bg_overlay_color": "#f9f7f4"
       }
     },
     "image-with-text": {
@@ -138,7 +150,10 @@
         "text": "<p>From everyday moments to life's biggest celebrations, our pieces are created to complement your unique style with timeless elegance.</p><p>Whether you're heading to the office, celebrating a milestone, or enjoying a night out, ElyvaraCo is designed to shine with you.</p><p><strong>Timeless style. Effortless confidence. Crafted for every occasion.</strong></p>",
         "button_label": "SHOP THE COLLECTION",
         "button_link": "shopify://collections",
-        "bg_color": "#ffffff"
+        "bg_color": "#ffffff",
+        "bg_image": "shopify://shop_images/37_3.webp",
+        "bg_overlay_opacity": 15,
+        "bg_overlay_color": "#ffffff"
       }
     },
     "new_arrivals_Mc6fex": {
@@ -151,7 +166,10 @@
         "products_to_show": 8,
         "show_sale_badge": true,
         "show_view_all": true,
-        "button_label": "EXPLORE NEW"
+        "button_label": "EXPLORE NEW",
+        "bg_image": "shopify://shop_images/Frame_1.png",
+        "bg_overlay_opacity": 10,
+        "bg_overlay_color": "#ffffff"
       }
     },
     "featured-collection": {
@@ -164,7 +182,10 @@
         "products_to_show": 4,
         "columns": "4",
         "show_view_all": true,
-        "show_sale_badge": true
+        "show_sale_badge": true,
+        "bg_image": "shopify://shop_images/2150347075.jpg",
+        "bg_overlay_opacity": 15,
+        "bg_overlay_color": "#ffffff"
       }
     },
     "bestsellers": {
@@ -207,7 +228,10 @@
         "products_to_show": 8,
         "columns": "3",
         "show_tabs": true,
-        "show_view_all": true
+        "show_view_all": true,
+        "bg_image": "shopify://shop_images/File_258_2.webp",
+        "bg_overlay_opacity": 15,
+        "bg_overlay_color": "#f9f7f4"
       }
     },
     "parallax-banner": {
@@ -228,6 +252,7 @@
         "slide_1": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/2151992036.jpg",
             "brand_name": "ELYVARACO",
             "star_rating": 5,
             "author": "Mea Lee",
@@ -240,6 +265,7 @@
         "slide_2": {
           "type": "slide",
           "settings": {
+            "image": "shopify://shop_images/39_1.webp",
             "brand_name": "ELYVARACO",
             "star_rating": 5,
             "author": "Sarah M.",
@@ -259,7 +285,10 @@
         "quote_text": "I've gotten more compliments on this ring than anything I've ever worn.",
         "attribution": "and she bought it for herself.",
         "autoplay": true,
-        "autoplay_speed": 5
+        "autoplay_speed": 5,
+        "bg_image": "shopify://shop_images/File_258_2.webp",
+        "bg_overlay_opacity": 15,
+        "bg_overlay_color": "#ffffff"
       }
     },
     "shop-the-look": {
@@ -298,7 +327,10 @@
       "settings": {
         "title": "SHOP OUR LOOKS",
         "subtitle": "<p>Some pieces come back. Some don't.</p><p>The ones that don't — people ask about them for months.</p>",
-        "image": "shopify://shop_images/File_258_2.webp"
+        "image": "shopify://shop_images/File_258_2.webp",
+        "bg_image": "shopify://shop_images/37_3.webp",
+        "bg_overlay_opacity": 10,
+        "bg_overlay_color": "#ffffff"
       }
     },
     "value-props": {
@@ -341,7 +373,10 @@
         "prop_3"
       ],
       "settings": {
-        "bg_color": "#ffffff"
+        "bg_color": "#ffffff",
+        "bg_image": "shopify://shop_images/File_258_2.webp",
+        "bg_overlay_opacity": 20,
+        "bg_overlay_color": "#ffffff"
       }
     },
     "collection-list": {
@@ -394,7 +429,10 @@
         "title": "Collections",
         "subtitle": "",
         "columns": "3",
-        "show_count": false
+        "show_count": false,
+        "bg_image": "shopify://shop_images/2150347075.jpg",
+        "bg_overlay_opacity": 15,
+        "bg_overlay_color": "#ffffff"
       }
     },
     "reviews": {
@@ -406,25 +444,31 @@
             "rating": 5,
             "text": "Super happy with my order, definitely worth it.",
             "author": "Savanna Chan",
-            "verified": true
+            "verified": true,
+            "author_image": "shopify://shop_images/37_3.webp",
+            "product_image": "shopify://shop_images/Lily_Clover_Necklace_Bracelet_Set_Front_View..webp"
           }
         },
         "review_kc4QDJ": {
           "type": "review",
           "settings": {
             "rating": 5,
-            "text": "Super happy with my order, definitely worth it.",
-            "author": "Savanna Chan",
-            "verified": true
+            "text": "The shine and craftsmanship exceeded my expectations. Beautiful packaging too!",
+            "author": "Jessica T.",
+            "verified": true,
+            "author_image": "shopify://shop_images/39_1.webp",
+            "product_image": "shopify://shop_images/Loma_Studs_Earring.webp"
           }
         },
         "review_j6JiDx": {
           "type": "review",
           "settings": {
             "rating": 5,
-            "text": "Super happy with my order, definitely worth it.",
-            "author": "Savanna Chan",
-            "verified": true
+            "text": "Got so many compliments wearing this out. Will definitely be ordering more.",
+            "author": "Elena R.",
+            "verified": true,
+            "author_image": "shopify://shop_images/no-need-text.png",
+            "product_image": "shopify://shop_images/Eye_of_Grace_BANGLE_Variant_View_Gold_Silver..webp"
           }
         }
       },
@@ -440,7 +484,10 @@
         "show_overall_rating": true,
         "overall_rating": "4.9",
         "review_count": "2,847",
-        "bg_color": "#f9f7f4"
+        "bg_color": "#f9f7f4",
+        "bg_image": "shopify://shop_images/File_258_2.webp",
+        "bg_overlay_opacity": 15,
+        "bg_overlay_color": "#f9f7f4"
       }
     },
     "instagram-feed": {
@@ -505,7 +552,10 @@
       ],
       "settings": {
         "title": "@elyvaraco",
-        "subtitle": "Follow us on Instagram"
+        "subtitle": "Follow us on Instagram",
+        "bg_image": "shopify://shop_images/2150347075.jpg",
+        "bg_overlay_opacity": 15,
+        "bg_overlay_color": "#ffffff"
       }
     },
     "newsletter": {
@@ -518,7 +568,10 @@
         "button_text": "Subscribe",
         "success_message": "Thank you for subscribing!",
         "disclaimer": "By subscribing you agree to our terms & privacy policy.",
-        "bg_color": "#ffffff"
+        "bg_color": "#ffffff",
+        "bg_image": "shopify://shop_images/File_258_2.webp",
+        "bg_overlay_opacity": 25,
+        "bg_overlay_color": "#ffffff"
       }
     }
   },

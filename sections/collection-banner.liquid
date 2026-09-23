@@ -1,15 +1,16 @@
 <section class="collection-banner">
-  {% if collection.image %}
+  {%- assign banner_image = collection.image | default: section.settings.bg_image -%}
+  {% if banner_image != blank %}
     <div class="collection-banner__image-wrapper">
       <img 
-        src="{{ collection.image | image_url: width: 1920 }}"
+        src="{{ banner_image | image_url: width: 1920 }}"
         alt="{{ collection.title }}"
         width="1920"
         height="400"
         class="collection-banner__image"
         loading="eager"
       >
-      <div class="collection-banner__overlay"></div>
+      <div class="collection-banner__overlay" style="opacity: {{ section.settings.overlay_opacity | default: 40 | divided_by: 100.0 }};"></div>
     </div>
   {% endif %}
   <div class="container">
@@ -25,6 +26,23 @@
 {% schema %}
 {
   "name": "Collection Banner",
-  "settings": []
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Default Banner Image",
+      "info": "Used as the fallback banner image if the collection does not have a featured image."
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay Opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "default": 40,
+      "unit": "%"
+    }
+  ]
 }
 {% endschema %}

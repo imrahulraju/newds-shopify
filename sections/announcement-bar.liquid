@@ -1,5 +1,8 @@
 {%- if section.settings.show_announcement -%}
-<div class="announcement-bar" style="background-color: {{ section.settings.bg_color }}; color: {{ section.settings.text_color }};">
+<div class="announcement-bar{% if section.settings.bg_image != blank %} has-bg-image{% endif %}" style="{% if section.settings.bg_image != blank %}background-image: url('{{ section.settings.bg_image | image_url: width: 2000 }}'); background-size: cover; background-position: center; position: relative;{% else %}background-color: {{ section.settings.bg_color }};{% endif %} color: {{ section.settings.text_color }};">
+  {% if section.settings.bg_image != blank and section.settings.bg_overlay_opacity > 0 %}
+    <div class="section-bg-overlay" style="background-color: {{ section.settings.bg_overlay_color | default: '#000000' }}; opacity: {{ section.settings.bg_overlay_opacity | divided_by: 100.0 }};"></div>
+  {% endif %}
   <div class="container">
     <div class="announcement-bar__inner">
       {% if section.settings.link != blank %}
@@ -46,6 +49,31 @@
       "id": "text_color",
       "label": "Text color",
       "default": "#333333"
+    },
+    {
+      "type": "header",
+      "content": "Background Image & Style"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "range",
+      "id": "bg_overlay_opacity",
+      "label": "Overlay Opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "default": 10,
+      "unit": "%"
+    },
+    {
+      "type": "color",
+      "id": "bg_overlay_color",
+      "label": "Overlay Color",
+      "default": "#000000"
     }
   ]
 }

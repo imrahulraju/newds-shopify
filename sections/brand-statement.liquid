@@ -1,8 +1,11 @@
-<section class="brand-statement section" id="brand-statement-{{ section.id }}">
+<section class="brand-statement section{% if section.settings.bg_image != blank %} has-bg-image{% endif %}" id="brand-statement-{{ section.id }}" style="{% if section.settings.bg_image != blank %}background-image: url('{{ section.settings.bg_image | image_url: width: 2000 }}');{% elsif section.settings.bg_color != blank %}background-color: {{ section.settings.bg_color }};{% endif %}{% if section.settings.text_color != blank %} color: {{ section.settings.text_color }};{% endif %}">
+  {% if section.settings.bg_image != blank and section.settings.bg_overlay_opacity > 0 %}
+    <div class="section-bg-overlay" style="background-color: {{ section.settings.bg_overlay_color | default: '#000000' }}; opacity: {{ section.settings.bg_overlay_opacity | divided_by: 100.0 }};"></div>
+  {% endif %}
   <div class="container container--narrow">
     <div class="brand-statement__inner">
       {% if section.settings.title != blank %}
-        <h2 class="brand-statement__title">{{ section.settings.title }}</h2>
+        <h2 class="brand-statement__title"{% if section.settings.text_color != blank %} style="color: {{ section.settings.text_color }};"{% endif %}>{{ section.settings.title }}</h2>
       {% endif %}
 
       <div class="brand-statement__body">
@@ -59,6 +62,41 @@
       "id": "closing_text",
       "label": "Closing Statement",
       "default": "That's what we design for."
+    },
+    {
+      "type": "header",
+      "content": "Background & Style"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Background Image"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color"
+    },
+    {
+      "type": "range",
+      "id": "bg_overlay_opacity",
+      "label": "Overlay Opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "default": 20,
+      "unit": "%"
+    },
+    {
+      "type": "color",
+      "id": "bg_overlay_color",
+      "label": "Overlay Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color"
     }
   ],
   "presets": [

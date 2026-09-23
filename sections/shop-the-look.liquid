@@ -1,4 +1,7 @@
-<section class="shop-the-look section" id="stl-{{ section.id }}">
+<section class="shop-the-look section{% if section.settings.bg_image != blank %} has-bg-image{% endif %}" id="stl-{{ section.id }}" style="{% if section.settings.bg_image != blank %}background-image: url('{{ section.settings.bg_image | image_url: width: 2000 }}');{% elsif section.settings.bg_color != blank %}background-color: {{ section.settings.bg_color }};{% endif %}">
+  {% if section.settings.bg_image != blank and section.settings.bg_overlay_opacity > 0 %}
+    <div class="section-bg-overlay" style="background-color: {{ section.settings.bg_overlay_color | default: '#ffffff' }}; opacity: {{ section.settings.bg_overlay_opacity | divided_by: 100.0 }};"></div>
+  {% endif %}
   <div class="container">
     {% if section.settings.title != blank or section.settings.subtitle != blank %}
       <div class="section__header" style="text-align: center; margin-bottom: 3rem;">
@@ -148,6 +151,36 @@
       "type": "image_picker",
       "id": "image",
       "label": "Lifestyle Image"
+    },
+    {
+      "type": "header",
+      "content": "Section Background & Style"
+    },
+    {
+      "type": "image_picker",
+      "id": "bg_image",
+      "label": "Section Background Image"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color"
+    },
+    {
+      "type": "range",
+      "id": "bg_overlay_opacity",
+      "label": "Overlay Opacity",
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "default": 10,
+      "unit": "%"
+    },
+    {
+      "type": "color",
+      "id": "bg_overlay_color",
+      "label": "Overlay Color",
+      "default": "#ffffff"
     }
   ],
   "blocks": [
