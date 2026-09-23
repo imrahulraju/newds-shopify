@@ -1,0 +1,33 @@
+<section class="about-page section">
+  <div class="container container--narrow">
+    <div class="about-page__header">
+      <span class="about-page__subtitle">OUR STORY</span>
+      <h1 class="about-page__title">{{ page.title | default: 'ABOUT ELYVARACO' }}</h1>
+    </div>
+
+    {% if page.content != blank %}
+      <div class="about-page__content rte">
+        {{ page.content }}
+      </div>
+    {% else %}
+      <div class="about-page__content rte">
+        <p class="about-page__lead">Welcome to ElyvaraCo — where timeless elegance meets modern craftsmanship.</p>
+        
+        <p>At ElyvaraCo, we believe that fine jewelry is more than an accessory; it is an expression of personal style, cherished memories, and everyday luxury. Each piece in our collection is thoughtfully designed and meticulously handcrafted to elevate your everyday glow.</p>
+
+        <h2>Our Mission</h2>
+        <p>We are dedicated to providing ethically sourced, premium jewelry designed for the modern woman. From subtle everyday gold accents to showstopping statement pieces, our goal is to inspire confidence and bring timeless beauty to every moment.</p>
+
+        <h2>Craftsmanship & Integrity</h2>
+        <p>Quality and sustainability lie at the heart of everything we do. We partner with skilled artisans who share our passion for detail, using premium metals and hand-selected stones designed to last a lifetime.</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About Page",
+  "settings": []
+}
+{% endschema %}

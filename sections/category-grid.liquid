@@ -1,0 +1,150 @@
+<section class="category-grid section">
+  <div class="container">
+    {% if section.settings.title != blank %}
+      <div class="section__header">
+        {% if section.settings.subtitle != blank %}
+          <p class="section__subtitle">{{ section.settings.subtitle }}</p>
+        {% endif %}
+        <h2 class="section__title">{{ section.settings.title }}</h2>
+      </div>
+    {% endif %}
+
+    <div class="category-grid__slider-container">
+      <button type="button" class="category-grid__arrow category-grid__arrow--prev" data-cat-prev aria-label="Previous categories">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="category-grid__slider" data-category-slider data-animate-grid>
+        {% for block in section.blocks %}
+          <div class="category-grid__slider-item" {{ block.shopify_attributes }}>
+            <a href="{{ block.settings.link | default: '#' }}" class="category-grid__item">
+              <div class="category-grid__image-wrapper">
+                {% if block.settings.image != blank %}
+                  <img 
+                    src="{{ block.settings.image | image_url: width: 400 }}"
+                    srcset="{{ block.settings.image | image_url: width: 300 }} 300w,
+                            {{ block.settings.image | image_url: width: 400 }} 400w"
+                    sizes="(max-width: 768px) 50vw, 20vw"
+                    alt="{{ block.settings.title }}"
+                    width="400"
+                    height="400"
+                    loading="lazy"
+                    class="category-grid__image"
+                  >
+                {% else %}
+                  <div class="category-grid__placeholder">
+                    {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  </div>
+                {% endif %}
+              </div>
+              {% if block.settings.title != blank %}
+                <h3 class="category-grid__title">{{ block.settings.title }}</h3>
+              {% endif %}
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+
+      <button type="button" class="category-grid__arrow category-grid__arrow--next" data-cat-next aria-label="Next categories">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    {% if section.settings.show_view_all %}
+      <div class="section__footer">
+        <a href="{{ section.settings.view_all_link | default: routes.collections_url }}" class="btn btn--secondary">
+          {{ section.settings.view_all_text | default: 'View All' }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Category Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Shop By Category"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Find your perfect piece"
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Columns",
+      "options": [
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" },
+        { "value": "5", "label": "5" },
+        { "value": "6", "label": "6" }
+      ],
+      "default": "5"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show view all button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_text",
+      "label": "View all button text",
+      "default": "View All"
+    },
+    {
+      "type": "url",
+      "id": "view_all_link",
+      "label": "View all link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Category",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Category"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Category Grid",
+      "blocks": [
+        { "type": "category", "settings": { "title": "Necklaces" } },
+        { "type": "category", "settings": { "title": "Bracelets" } },
+        { "type": "category", "settings": { "title": "Earrings" } },
+        { "type": "category", "settings": { "title": "Rings" } },
+        { "type": "category", "settings": { "title": "Anklets" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

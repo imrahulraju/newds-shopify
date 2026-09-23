@@ -1,0 +1,290 @@
+<section class="customer-spotlight section" id="customer-spotlight-{{ section.id }}">
+  <div class="container container--narrow">
+    <div class="customer-spotlight__header">
+      {% if section.settings.title != blank %}
+        <h2 class="customer-spotlight__title">{{ section.settings.title }}</h2>
+      {% endif %}
+
+      {% if section.settings.quote_text != blank %}
+        <blockquote class="customer-spotlight__quote">
+          "{{ section.settings.quote_text }}"
+        </blockquote>
+      {% endif %}
+
+      {% if section.settings.attribution != blank %}
+        <p class="customer-spotlight__attribution">— {{ section.settings.attribution }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="customer-spotlight__slider-wrapper container">
+    <div class="customer-spotlight__slider" data-spotlight-slider>
+      {% for block in section.blocks %}
+        <div class="customer-spotlight__slide{% if forloop.first %} is-active{% endif %}" data-spotlight-slide="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+          <div class="customer-spotlight__image-box">
+            {% if block.settings.image != blank %}
+              <img
+                src="{{ block.settings.image | image_url: width: 1200 }}"
+                srcset="{{ block.settings.image | image_url: width: 600 }} 600w,
+                        {{ block.settings.image | image_url: width: 1200 }} 1200w"
+                sizes="(max-width: 768px) 100vw, 1000px"
+                alt="{{ block.settings.author | default: 'Customer review' | escape }}"
+                width="1200"
+                height="800"
+                loading="lazy"
+                class="customer-spotlight__image"
+              >
+            {% else %}
+              <div class="customer-spotlight__placeholder">
+                {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+            {% endif %}
+
+            <!-- Overlay Review Card -->
+            <div class="customer-spotlight__card">
+              {% if block.settings.brand_name != blank %}
+                <div class="customer-spotlight__card-brand">{{ block.settings.brand_name }}</div>
+              {% endif %}
+
+              <div class="customer-spotlight__card-meta">
+                <div class="customer-spotlight__stars">
+                  {% assign rating = block.settings.star_rating | default: 5 %}
+                  {% for i in (1..rating) %}
+                    <svg class="star-icon" width="16" height="16" viewBox="0 0 24 24" fill="#FFC107">
+                      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                  {% endfor %}
+                </div>
+
+                {% if block.settings.author != blank %}
+                  <span class="customer-spotlight__author">{{ block.settings.author }}</span>
+                {% endif %}
+
+                {% if block.settings.is_verified %}
+                  <span class="customer-spotlight__verified">
+                    Verified
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="#1DA1F2">
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                  </span>
+                {% endif %}
+              </div>
+
+              {% if block.settings.review_text != blank %}
+                <p class="customer-spotlight__card-text">{{ block.settings.review_text }}</p>
+              {% endif %}
+
+              {% if block.settings.product_name != blank %}
+                {% if block.settings.product_link != blank %}
+                  <a href="{{ block.settings.product_link }}" class="customer-spotlight__product-link">
+                    {{ block.settings.product_name }}
+                  </a>
+                {% else %}
+                  <div class="customer-spotlight__product-name">{{ block.settings.product_name }}</div>
+                {% endif %}
+              {% endif %}
+            </div>
+
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Navigation Dots -->
+    {% if section.blocks.size > 1 %}
+      <div class="customer-spotlight__dots" data-spotlight-dots>
+        {% for block in section.blocks %}
+          <button
+            type="button"
+            class="customer-spotlight__dot{% if forloop.first %} is-active{% endif %}"
+            data-spotlight-dot="{{ forloop.index0 }}"
+            aria-label="Go to slide {{ forloop.index }}"
+          ></button>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<script>
+  (function() {
+    function initSpotlightSlider() {
+      const section = document.getElementById('customer-spotlight-{{ section.id }}');
+      if (!section) return;
+
+      const slides = section.querySelectorAll('[data-spotlight-slide]');
+      const dots = section.querySelectorAll('[data-spotlight-dot]');
+      if (slides.length <= 1) return;
+
+      let currentIndex = 0;
+      let autoplayTimer = null;
+
+      function goToSlide(index) {
+        if (index < 0) index = slides.length - 1;
+        if (index >= slides.length) index = 0;
+
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('is-active', i === index);
+        });
+
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('is-active', i === index);
+        });
+
+        currentIndex = index;
+      }
+
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+          goToSlide(i);
+          resetAutoplay();
+        });
+      });
+
+      function startAutoplay() {
+        {% if section.settings.autoplay %}
+          autoplayTimer = setInterval(() => {
+            goToSlide(currentIndex + 1);
+          }, {{ section.settings.autoplay_speed | default: 5 | times: 1000 }});
+        {% endif %}
+      }
+
+      function resetAutoplay() {
+        if (autoplayTimer) clearInterval(autoplayTimer);
+        startAutoplay();
+      }
+
+      startAutoplay();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initSpotlightSlider);
+    } else {
+      initSpotlightSlider();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Customer Spotlight",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "LET HER SAY IT"
+    },
+    {
+      "type": "text",
+      "id": "quote_text",
+      "label": "Featured Quote",
+      "default": "I've gotten more compliments on this ring than anything I've ever worn."
+    },
+    {
+      "type": "text",
+      "id": "attribution",
+      "label": "Sub-Attribution",
+      "default": "and she bought it for herself."
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "Auto-rotate slides",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "min": 3,
+      "max": 9,
+      "step": 1,
+      "unit": "s",
+      "label": "Change slide every",
+      "default": 5
+    }
+  ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "Spotlight Slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Background Image"
+        },
+        {
+          "type": "text",
+          "id": "brand_name",
+          "label": "Brand Tag/Name",
+          "default": "ELYVARACO"
+        },
+        {
+          "type": "range",
+          "id": "star_rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "label": "Star Rating",
+          "default": 5
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Reviewer Name",
+          "default": "Mea Lee"
+        },
+        {
+          "type": "checkbox",
+          "id": "is_verified",
+          "label": "Show Verified Badge",
+          "default": true
+        },
+        {
+          "type": "textarea",
+          "id": "review_text",
+          "label": "Review Text",
+          "default": "Super happy with my order, definitely worth it."
+        },
+        {
+          "type": "text",
+          "id": "product_name",
+          "label": "Product Tag/Name",
+          "default": "Solarose Chain"
+        },
+        {
+          "type": "url",
+          "id": "product_link",
+          "label": "Product Link (Optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Customer Spotlight",
+      "blocks": [
+        {
+          "type": "slide",
+          "settings": {
+            "brand_name": "ELYVARACO",
+            "author": "Mea Lee",
+            "review_text": "Super happy with my order, definitely worth it.",
+            "product_name": "Solarose Chain"
+          }
+        },
+        {
+          "type": "slide",
+          "settings": {
+            "brand_name": "ELYVARACO",
+            "author": "Sarah M.",
+            "review_text": "The quality and shine are absolutely unmatched. I wear it everyday!",
+            "product_name": "Loma Studs Earrings"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

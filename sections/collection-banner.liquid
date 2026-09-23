@@ -1,0 +1,30 @@
+<section class="collection-banner">
+  {% if collection.image %}
+    <div class="collection-banner__image-wrapper">
+      <img 
+        src="{{ collection.image | image_url: width: 1920 }}"
+        alt="{{ collection.title }}"
+        width="1920"
+        height="400"
+        class="collection-banner__image"
+        loading="eager"
+      >
+      <div class="collection-banner__overlay"></div>
+    </div>
+  {% endif %}
+  <div class="container">
+    <div class="collection-banner__content">
+      <h1 class="collection-banner__title">{{ collection.title }}</h1>
+      {% if collection.description != blank %}
+        <div class="collection-banner__description">{{ collection.description }}</div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection Banner",
+  "settings": []
+}
+{% endschema %}

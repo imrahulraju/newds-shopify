@@ -1,0 +1,544 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "hero-slideshow",
+      "blocks": {
+        "slide_ePjmri": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1_1.png",
+            "mobile_image": "shopify://shop_images/ChatGPT_Image_Aug_20_2026_11_49_23_PM.png",
+            "subtitle": "",
+            "heading": "",
+            "text": "",
+            "button_text": "",
+            "button_link": "shopify://collections",
+            "text_position": "left"
+          }
+        }
+      },
+      "block_order": [
+        "slide_ePjmri"
+      ],
+      "settings": {
+        "autoplay": true,
+        "autoplay_speed": 5
+      }
+    },
+    "brand_statement": {
+      "type": "brand-statement",
+      "settings": {
+        "title": "MADE TO BE NOTICED",
+        "line_1": "The perfect piece that completes your look.",
+        "line_2": "The detail that feels effortlessly luxurious.",
+        "line_3": "The piece your friends notice first — without you saying a word.\n\nThat’s what we design for.",
+        "closing_text": "ELYVARA — Fashion Jewelry, made to be noticed."
+      }
+    },
+    "category-grid": {
+      "type": "category-grid",
+      "blocks": {
+        "category_TiVb7r": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/Loma_Studs_Earring.webp",
+            "title": "Earrings",
+            "link": ""
+          }
+        },
+        "category_87t97j": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/Lily_Clover_Necklace_Bracelet_Set_Front_View..webp",
+            "title": "Nacklace",
+            "link": ""
+          }
+        },
+        "category_k6CHUE": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/billi_EAR_CUFF.webp",
+            "title": "Rings",
+            "link": ""
+          }
+        },
+        "category_p4Yar7": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/Eye_of_Grace_BANGLE_Variant_View_Gold_Silver..webp",
+            "title": "Bracelets",
+            "link": ""
+          }
+        },
+        "category_EmhAAF": {
+          "type": "category",
+          "settings": {
+            "image": "shopify://shop_images/IMG-20250731-WA0021.webp",
+            "title": "Accessories",
+            "link": "shopify://collections/accessories"
+          }
+        }
+      },
+      "block_order": [
+        "category_TiVb7r",
+        "category_87t97j",
+        "category_k6CHUE",
+        "category_p4Yar7",
+        "category_EmhAAF"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "Shop By Category",
+        "subtitle": "Find your perfect piece",
+        "columns": "5",
+        "show_view_all": true,
+        "view_all_text": "View All",
+        "view_all_link": ""
+      }
+    },
+    "new-arrivals": {
+      "type": "new-arrivals",
+      "settings": {
+        "title": "NEW JEWELRY ARRIVALS",
+        "subtitle": "",
+        "collection": "new",
+        "products_to_show": 8,
+        "show_sale_badge": true,
+        "show_view_all": true,
+        "button_label": "EXPLORE NEW"
+      }
+    },
+    "free-gift-promo": {
+      "type": "free-gift-promo",
+      "settings": {
+        "image": "shopify://shop_images/WhatsApp_Image_2026-07-19_at_7.40.25_AM_1.png",
+        "title": "A SPECIAL GIFT AWAITS",
+        "description": "<p>Enjoy a <strong>complimentary surprise gift</strong> and <strong>FREE shipping</strong> when you spend <strong>$100 USD or more</strong>.</p><p>Every qualifying order is carefully packed with an exclusive gift—our way of saying thank you for choosing ElyvaraCo.</p>",
+        "button_text": "SHOP NOW & CLAIM YOUR GIFT",
+        "button_link": "",
+        "bg_color": "#f9f7f4"
+      }
+    },
+    "image-with-text": {
+      "type": "image-with-text",
+      "settings": {
+        "image": "shopify://shop_images/2151992036.jpg",
+        "layout": "left",
+        "subtitle": "STYLE THAT STAYS WITH YOU",
+        "title": "",
+        "text": "<p>From everyday moments to life's biggest celebrations, our pieces are created to complement your unique style with timeless elegance.</p><p>Whether you're heading to the office, celebrating a milestone, or enjoying a night out, ElyvaraCo is designed to shine with you.</p><p><strong>Timeless style. Effortless confidence. Crafted for every occasion.</strong></p>",
+        "button_label": "SHOP THE COLLECTION",
+        "button_link": "shopify://collections",
+        "bg_color": "#ffffff"
+      }
+    },
+    "new_arrivals_Mc6fex": {
+      "type": "new-arrivals",
+      "disabled": true,
+      "settings": {
+        "title": "NEW JEWELRY",
+        "subtitle": "",
+        "collection": "jewelry",
+        "products_to_show": 8,
+        "show_sale_badge": true,
+        "show_view_all": true,
+        "button_label": "EXPLORE NEW"
+      }
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "disabled": true,
+      "settings": {
+        "title": "40% Off",
+        "subtitle": "Limited time offer on selected pieces",
+        "collection": "nee-products",
+        "products_to_show": 4,
+        "columns": "4",
+        "show_view_all": true,
+        "show_sale_badge": true
+      }
+    },
+    "bestsellers": {
+      "type": "bestsellers",
+      "blocks": {
+        "tab_eGUxtz": {
+          "type": "tab",
+          "settings": {
+            "title": "Necklaces",
+            "collection": ""
+          }
+        },
+        "tab_aRpkq8": {
+          "type": "tab",
+          "settings": {
+            "title": "Necklaces",
+            "collection": ""
+          }
+        },
+        "tab_Yft8FT": {
+          "type": "tab",
+          "settings": {
+            "title": "Necklaces",
+            "collection": ""
+          }
+        }
+      },
+      "block_order": [
+        "tab_eGUxtz",
+        "tab_aRpkq8",
+        "tab_Yft8FT"
+      ],
+      "custom_css": [
+        ".bestsellers {background-color: #f9f7f4;}"
+      ],
+      "settings": {
+        "title": "Our Bestsellers",
+        "subtitle": "",
+        "collection": "jewelry",
+        "products_to_show": 8,
+        "columns": "3",
+        "show_tabs": true,
+        "show_view_all": true
+      }
+    },
+    "parallax-banner": {
+      "type": "parallax-banner",
+      "settings": {
+        "image": "shopify://shop_images/File_258_2.webp",
+        "heading": "THE JOY BEGINS BEFORE YOU OPEN IT",
+        "text": "<p>There's something magical about opening a beautifully wrapped package—or watching someone else experience that excitement.</p><p>That's why every ElyvaraCo order is carefully packaged and ready to gift, with no extra fees or special requests.</p>",
+        "button_text": "",
+        "button_link": "",
+        "overlay_opacity": 0,
+        "section_height": 500
+      }
+    },
+    "customer_spotlight": {
+      "type": "customer-spotlight",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "brand_name": "ELYVARACO",
+            "star_rating": 5,
+            "author": "Mea Lee",
+            "is_verified": true,
+            "review_text": "Super happy with my order, definitely worth it.",
+            "product_name": "Solarose Chain",
+            "product_link": ""
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "brand_name": "ELYVARACO",
+            "star_rating": 5,
+            "author": "Sarah M.",
+            "is_verified": true,
+            "review_text": "The quality and shine are absolutely unmatched. I wear it everyday!",
+            "product_name": "Loma Studs Earrings",
+            "product_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_2"
+      ],
+      "settings": {
+        "title": "LET HER SAY IT",
+        "quote_text": "I've gotten more compliments on this ring than anything I've ever worn.",
+        "attribution": "and she bought it for herself.",
+        "autoplay": true,
+        "autoplay_speed": 5
+      }
+    },
+    "shop-the-look": {
+      "type": "shop-the-look",
+      "blocks": {
+        "hotspot_1": {
+          "type": "hotspot",
+          "settings": {
+            "product": "nee-products",
+            "x_pos": 33,
+            "y_pos": 46
+          }
+        },
+        "hotspot_2": {
+          "type": "hotspot",
+          "settings": {
+            "product": "nee-products",
+            "x_pos": 45,
+            "y_pos": 80
+          }
+        },
+        "hotspot_3": {
+          "type": "hotspot",
+          "settings": {
+            "product": "nee-products",
+            "x_pos": 61,
+            "y_pos": 66
+          }
+        }
+      },
+      "block_order": [
+        "hotspot_1",
+        "hotspot_2",
+        "hotspot_3"
+      ],
+      "settings": {
+        "title": "SHOP OUR LOOKS",
+        "subtitle": "<p>Some pieces come back. Some don't.</p><p>The ones that don't — people ask about them for months.</p>",
+        "image": "shopify://shop_images/File_258_2.webp"
+      }
+    },
+    "value-props": {
+      "type": "value-props",
+      "blocks": {
+        "prop_1": {
+          "type": "proposition",
+          "settings": {
+            "icon_type": "shield",
+            "icon_svg": "",
+            "title": "SECURE SHOPPING",
+            "text": "Your privacy and security come first. Every payment is protected with trusted encryption for a safe and worry-free shopping experience.",
+            "show_payment_icons": true
+          }
+        },
+        "prop_2": {
+          "type": "proposition",
+          "settings": {
+            "icon_type": "gift",
+            "icon_svg": "",
+            "title": "LUXURY GIFT PACKAGING",
+            "text": "Every order is elegantly packaged and ready to gift, creating a memorable unboxing experience from the moment it arrives.",
+            "show_payment_icons": false
+          }
+        },
+        "prop_3": {
+          "type": "proposition",
+          "settings": {
+            "icon_type": "returns",
+            "icon_svg": "",
+            "title": "HASSLE-FREE RETURNS",
+            "text": "Shop with confidence knowing our straightforward return process makes exchanges and returns simple when eligible.",
+            "show_payment_icons": false
+          }
+        }
+      },
+      "block_order": [
+        "prop_1",
+        "prop_2",
+        "prop_3"
+      ],
+      "settings": {
+        "bg_color": "#ffffff"
+      }
+    },
+    "collection-list": {
+      "type": "collection-list",
+      "blocks": {
+        "collection_WMfH9T": {
+          "type": "collection",
+          "settings": {
+            "collection": "jewelry",
+            "image": "shopify://shop_images/Loma_Studs_Earring_845262b2-01f1-492d-9977-f3198ae511b4.webp",
+            "title": "",
+            "subheading": "18K GOLD PLATED"
+          }
+        },
+        "collection_RVNarr": {
+          "type": "collection",
+          "settings": {
+            "collection": "",
+            "image": "shopify://shop_images/File_258_2.webp",
+            "title": "",
+            "subheading": "18K GOLD PLATED"
+          }
+        },
+        "collection_gkLTAP": {
+          "type": "collection",
+          "settings": {
+            "collection": "accessories",
+            "image": "shopify://shop_images/IMG-20250731-WA0021.webp",
+            "title": "",
+            "subheading": "18K GOLD PLATED"
+          }
+        },
+        "collection_fmMVFF": {
+          "type": "collection",
+          "settings": {
+            "collection": "nee-products",
+            "image": "shopify://shop_images/2150347075.jpg",
+            "title": "",
+            "subheading": "18K GOLD PLATED"
+          }
+        }
+      },
+      "block_order": [
+        "collection_WMfH9T",
+        "collection_RVNarr",
+        "collection_gkLTAP",
+        "collection_fmMVFF"
+      ],
+      "settings": {
+        "title": "Collections",
+        "subtitle": "",
+        "columns": "3",
+        "show_count": false
+      }
+    },
+    "reviews": {
+      "type": "reviews",
+      "blocks": {
+        "review_8HHqFW": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "text": "Super happy with my order, definitely worth it.",
+            "author": "Savanna Chan",
+            "verified": true
+          }
+        },
+        "review_kc4QDJ": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "text": "Super happy with my order, definitely worth it.",
+            "author": "Savanna Chan",
+            "verified": true
+          }
+        },
+        "review_j6JiDx": {
+          "type": "review",
+          "settings": {
+            "rating": 5,
+            "text": "Super happy with my order, definitely worth it.",
+            "author": "Savanna Chan",
+            "verified": true
+          }
+        }
+      },
+      "block_order": [
+        "review_8HHqFW",
+        "review_kc4QDJ",
+        "review_j6JiDx"
+      ],
+      "disabled": true,
+      "settings": {
+        "title": "Our Happy Customers",
+        "subtitle": "What our customers are saying",
+        "show_overall_rating": true,
+        "overall_rating": "4.9",
+        "review_count": "2,847",
+        "bg_color": "#f9f7f4"
+      }
+    },
+    "instagram-feed": {
+      "type": "instagram-feed",
+      "blocks": {
+        "image_mkELr6": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/2151992036.jpg",
+            "link": "https://www.instagram.com/____elyvara_official?igsh=MXgxbXJtdnl4eDN5Yw%3D%3D&utm_source=qr",
+            "show_play_icon": false
+          }
+        },
+        "image_QWfyry": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/39_1.webp",
+            "link": "",
+            "show_play_icon": false
+          }
+        },
+        "image_M8BJa3": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/IMG-20250731-WA0021.webp",
+            "link": "",
+            "show_play_icon": false
+          }
+        },
+        "image_t3NMKY": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/no-need-text.png",
+            "link": "",
+            "show_play_icon": false
+          }
+        },
+        "image_7XjBa6": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/37_3.webp",
+            "link": "",
+            "show_play_icon": false
+          }
+        },
+        "image_P7Bmea": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1.png",
+            "link": "",
+            "show_play_icon": false
+          }
+        }
+      },
+      "block_order": [
+        "image_mkELr6",
+        "image_QWfyry",
+        "image_M8BJa3",
+        "image_t3NMKY",
+        "image_7XjBa6",
+        "image_P7Bmea"
+      ],
+      "settings": {
+        "title": "@elyvaraco",
+        "subtitle": "Follow us on Instagram"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "disabled": true,
+      "settings": {
+        "title": "Join the Glow",
+        "subtitle": "Subscribe for exclusive offers and new arrivals",
+        "placeholder": "Enter your email",
+        "button_text": "Subscribe",
+        "success_message": "Thank you for subscribing!",
+        "disclaimer": "By subscribing you agree to our terms & privacy policy.",
+        "bg_color": "#ffffff"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "brand_statement",
+    "category-grid",
+    "new-arrivals",
+    "free-gift-promo",
+    "image-with-text",
+    "new_arrivals_Mc6fex",
+    "featured-collection",
+    "bestsellers",
+    "parallax-banner",
+    "customer_spotlight",
+    "shop-the-look",
+    "value-props",
+    "collection-list",
+    "reviews",
+    "instagram-feed",
+    "newsletter"
+  ]
+}

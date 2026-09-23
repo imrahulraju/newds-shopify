@@ -1,0 +1,126 @@
+<section class="instagram-feed section">
+  <div class="container">
+    {% if section.settings.title != blank %}
+      <div class="section__header">
+        {% if section.settings.subtitle != blank %}
+          <p class="section__subtitle">{{ section.settings.subtitle }}</p>
+        {% endif %}
+        <h2 class="section__title">{{ section.settings.title }}</h2>
+      </div>
+    {% endif %}
+
+    <div class="instagram-feed__slider-container">
+      <button type="button" class="instagram-feed__arrow instagram-feed__arrow--prev" data-insta-prev aria-label="Previous posts">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="instagram-feed__slider" data-instagram-slider>
+        {% for block in section.blocks %}
+          <div class="instagram-feed__slider-item">
+            <a href="{{ block.settings.link | default: settings.social_instagram | default: '#' }}" 
+               class="instagram-feed__item" 
+               target="_blank" 
+               rel="noopener noreferrer"
+               {{ block.shopify_attributes }}>
+              {% if block.settings.image != blank %}
+                <img 
+                  src="{{ block.settings.image | image_url: width: 450 }}"
+                  alt="Instagram post"
+                  width="450"
+                  height="560"
+                  loading="lazy"
+                  class="instagram-feed__image"
+                >
+              {% else %}
+                <div class="instagram-feed__placeholder">
+                  {{ 'product-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg' }}
+                </div>
+              {% endif %}
+              
+              {% if block.settings.show_play_icon %}
+                <div class="instagram-feed__play-indicator">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                </div>
+              {% endif %}
+
+              <div class="instagram-feed__overlay">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/>
+                </svg>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+
+      <button type="button" class="instagram-feed__arrow instagram-feed__arrow--next" data-insta-next aria-label="Next posts">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Instagram Feed",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "FOLLOW US ON INSTAGRAM"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Follow us on Instagram"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Instagram Post",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Post link"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_play_icon",
+          "label": "Show video play indicator",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Instagram Feed Slider",
+      "blocks": [
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image" },
+        { "type": "image", "settings": { "show_play_icon": true } },
+        { "type": "image" }
+      ]
+    }
+  ]
+}
+{% endschema %}

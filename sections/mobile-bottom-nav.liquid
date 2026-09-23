@@ -1,0 +1,60 @@
+<div class="mobile-bottom-nav" data-mobile-bottom-nav>
+  <div class="mobile-bottom-nav__container">
+    
+    <!-- Home -->
+    <a href="/" class="mobile-bottom-nav__item{% if request.path == '/' %} is-active{% endif %}">
+      <div class="mobile-bottom-nav__icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+      </div>
+      <span class="mobile-bottom-nav__label">Home</span>
+    </a>
+
+    <!-- Collections -->
+    <a href="/collections" class="mobile-bottom-nav__item{% if request.path contains '/collections' %} is-active{% endif %}">
+      <div class="mobile-bottom-nav__icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7"/>
+          <rect x="14" y="3" width="7" height="7"/>
+          <rect x="14" y="14" width="7" height="7"/>
+          <rect x="3" y="14" width="7" height="7"/>
+        </svg>
+      </div>
+      <span class="mobile-bottom-nav__label">Collections</span>
+    </a>
+
+    <!-- Cart -->
+    <a href="{{ routes.cart_url }}" class="mobile-bottom-nav__item{% if request.path == '/cart' %} is-active{% endif %}" data-cart-toggle>
+      <div class="mobile-bottom-nav__icon mobile-bottom-nav__icon--cart">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6V20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C19.5304 22 20.0391 21.7893 20.4142 21.4142C20.7893 21.0391 21 20.5304 21 20V6L18 2H6Z"/>
+          <path d="M3 6H21"/>
+          <path d="M16 10C16 11.0609 15.5786 12.0783 14.8284 12.8284C14.0783 13.5786 13.0609 14 12 14C10.9391 14 9.92172 13.5786 9.17157 12.8284C8.42143 12.0783 8 11.0609 8 10"/>
+        </svg>
+        <span class="mobile-bottom-nav__badge" data-cart-count>{{ cart.item_count }}</span>
+      </div>
+      <span class="mobile-bottom-nav__label">Cart</span>
+    </a>
+
+    <!-- Profile -->
+    <a href="{% if customer %}/account{% else %}/account/login{% endif %}" class="mobile-bottom-nav__item{% if request.path contains '/account' %} is-active{% endif %}">
+      <div class="mobile-bottom-nav__icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </div>
+      <span class="mobile-bottom-nav__label">Profile</span>
+    </a>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Mobile Bottom Navigation",
+  "settings": []
+}
+{% endschema %}

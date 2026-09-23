@@ -1,0 +1,106 @@
+<section class="contact-section section">
+  <div class="container container--narrow">
+    <div class="contact-header">
+      <h1 class="contact-title">{{ section.settings.heading | default: page.title | default: 'CONTACT' }}</h1>
+      <div class="contact-description rte">
+        {%- if section.settings.description != blank -%}
+          <p>{{ section.settings.description }}</p>
+        {%- else -%}
+          <p>{{ page.content | default: 'We’re here to help. Contact us for questions about orders, jewelry care, or collaborations. Our team will respond with care and sparkle.' }}</p>
+        {%- endif -%}
+      </div>
+    </div>
+
+    <div class="contact-form-wrapper">
+      {%- form 'contact', id: 'ContactForm', class: 'contact-form' -%}
+        {%- if form.posted_successfully? -%}
+          <div class="form-status form-status--success" tabindex="-1" autofocus>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M5 10L8 13L15 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Thanks for contacting us! We'll get back to you as soon as possible.</span>
+          </div>
+        {%- elsif form.errors -%}
+          <div class="form-status form-status--error" role="alert">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M10 7v6M10 13h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span>Please adjust the fields below:</span>
+            {{ form.errors | default_errors }}
+          </div>
+        {%- endif -%}
+
+        <div class="contact-fields-grid">
+          <div class="field">
+            <input
+              type="text"
+              name="contact[name]"
+              id="ContactForm-name"
+              class="field__input"
+              value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+              placeholder="Name"
+              aria-label="Name"
+            >
+          </div>
+          <div class="field">
+            <input
+              type="email"
+              name="contact[email]"
+              id="ContactForm-email"
+              class="field__input"
+              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+              placeholder="E-mail"
+              aria-label="E-mail"
+              required
+              aria-required="true"
+              spellcheck="false"
+              autocapitalize="off"
+            >
+          </div>
+        </div>
+
+        <div class="field">
+          <textarea
+            rows="6"
+            name="contact[body]"
+            id="ContactForm-body"
+            class="field__input field__input--textarea"
+            placeholder="Message"
+            aria-label="Message"
+            required
+            aria-required="true"
+          >
+            {{- form.body -}}
+          </textarea>
+        </div>
+
+        <div class="contact__submit-wrapper">
+          <button type="submit" class="btn contact__submit-btn">
+            SEND MESSAGE
+          </button>
+        </div>
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact Form",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "CONTACT"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Have a question or need assistance? Whether it's about your order, our collections, jewellery care, or business collaborations, the ElyvaraCo team is ready to help. We aim to provide friendly, timely support and ensure every experience with us is exceptional."
+    }
+  ]
+}
+{% endschema %}

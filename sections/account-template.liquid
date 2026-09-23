@@ -1,0 +1,64 @@
+<section class="customer-page section">
+  <div class="container">
+
+    <div class="account-header">
+      <div class="account-header__text">
+        <p class="section__subtitle">My Account</p>
+        <h1 class="section__title">Hello, {{ customer.first_name }}</h1>
+      </div>
+      <a href="/account/logout" class="btn btn--secondary">Sign Out</a>
+    </div>
+
+    <div class="account-grid">
+
+      <!-- Order History -->
+      <div class="account-section">
+        <h2 class="account-section__title">Order History</h2>
+        {% if customer.orders.size == 0 %}
+          <p class="account-empty">You haven't placed any orders yet. <a href="/collections/all" class="form-link">Start shopping</a></p>
+        {% else %}
+          <div class="account-orders">
+            <div class="account-orders__header">
+              <span>Order</span>
+              <span>Date</span>
+              <span>Payment</span>
+              <span>Fulfillment</span>
+              <span>Total</span>
+            </div>
+            {% for order in customer.orders %}
+              <a href="{{ order.customer_url }}" class="account-orders__row">
+                <span class="account-orders__number">{{ order.name }}</span>
+                <span>{{ order.created_at | date: "%b %d, %Y" }}</span>
+                <span class="account-orders__badge account-orders__badge--{{ order.financial_status }}">{{ order.financial_status_label }}</span>
+                <span class="account-orders__badge account-orders__badge--{{ order.fulfillment_status }}">{{ order.fulfillment_status_label | default: 'Unfulfilled' }}</span>
+                <span>{{ order.total_price | money }}</span>
+              </a>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <!-- Account Details -->
+      <div class="account-section">
+        <h2 class="account-section__title">Account Details</h2>
+        <div class="account-details">
+          <p><strong>{{ customer.name }}</strong></p>
+          <p>{{ customer.email }}</p>
+          {% if customer.default_address %}
+            <div class="account-address">
+              {{ customer.default_address | format_address }}
+            </div>
+          {% endif %}
+          <div class="account-details__actions">
+            <a href="/account/addresses" class="btn btn--secondary">Manage Addresses</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Account Template", "settings": [] }
+{% endschema %}

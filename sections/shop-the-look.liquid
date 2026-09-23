@@ -1,0 +1,197 @@
+<section class="shop-the-look section" id="stl-{{ section.id }}">
+  <div class="container">
+    {% if section.settings.title != blank or section.settings.subtitle != blank %}
+      <div class="section__header" style="text-align: center; margin-bottom: 3rem;">
+        {% if section.settings.title != blank %}
+          <h2 class="section__title" style="text-transform: uppercase; letter-spacing: 0.08em; font-size: clamp(1.5rem, 3.5vw, 2rem); margin-bottom: 1rem;">
+            {{ section.settings.title }}
+          </h2>
+        {% endif %}
+        {% if section.settings.subtitle != blank %}
+          <div class="section__subtitle" style="font-size: 0.95rem; line-height: 1.7; color: var(--color-text); max-width: 600px; margin: 0 auto;">
+            {{ section.settings.subtitle }}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="shop-the-look__inner">
+      <!-- Left Column: Image with Hotspots -->
+      <div class="shop-the-look__image-wrapper">
+        {% if section.settings.image != blank %}
+          <img 
+            src="{{ section.settings.image | image_url: width: 1000 }}" 
+            alt="{{ section.settings.title | default: 'Shop the Look' }}"
+            class="shop-the-look__image"
+            loading="lazy"
+          >
+        {% else %}
+          <div class="shop-the-look__placeholder">
+            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {% endif %}
+
+        <!-- Hotspot dots -->
+        {% for block in section.blocks %}
+          {%- assign prod = block.settings.product -%}
+          {% if prod.title == blank and block.settings.product != blank %}
+            {%- assign prod = all_products[block.settings.product] -%}
+          {% endif %}
+          
+          {%- assign prod_title = prod.title | default: 'Opal Clover Bangle' -%}
+          {%- if forloop.index == 2 -%}
+            {%- assign prod_title = prod.title | default: 'Emerald Solitaire Ring' -%}
+          {%- elsif forloop.index == 3 -%}
+            {%- assign prod_title = prod.title | default: 'Classic Twist Ring' -%}
+          {%- endif -%}
+
+          <button 
+            type="button" 
+            class="shop-the-look__hotspot {% if forloop.first %}is-active{% endif %}" 
+            style="left: {{ block.settings.x_pos }}%; top: {{ block.settings.y_pos }}%;"
+            data-hotspot-index="{{ forloop.index0 }}"
+            aria-label="View product {{ prod_title }}"
+            {{ block.shopify_attributes }}
+          >
+            <span class="shop-the-look__hotspot-pulse"></span>
+          </button>
+        {% endfor %}
+      </div>
+
+      <!-- Right Column: Product Slider Card -->
+      <div class="shop-the-look__slider-wrapper">
+        <div class="shop-the-look__slider" data-stl-slider>
+          {% for block in section.blocks %}
+            {%- assign prod = block.settings.product -%}
+            {% if prod.title == blank and block.settings.product != blank %}
+              {%- assign prod = all_products[block.settings.product] -%}
+            {% endif %}
+
+            {%- assign prod_title = prod.title | default: 'Opal Clover Bangle' -%}
+            {%- assign prod_price = prod.price | money | default: '$55.00' -%}
+            {%- assign prod_url = prod.url | default: '/collections/all' -%}
+            
+            {%- if forloop.index == 2 -%}
+              {%- assign prod_title = prod.title | default: 'Emerald Solitaire Ring' -%}
+              {%- assign prod_price = '$65.00' -%}
+            {%- elsif forloop.index == 3 -%}
+              {%- assign prod_title = prod.title | default: 'Classic Twist Ring' -%}
+              {%- assign prod_price = '$45.00' -%}
+            {%- endif -%}
+
+            <div class="shop-the-look__slide {% if forloop.first %}is-active{% endif %}" data-stl-slide-index="{{ forloop.index0 }}">
+              <div class="shop-the-look__product-card">
+                <a href="{{ prod_url }}" class="shop-the-look__product-img-link">
+                  {% if prod.featured_image != blank %}
+                    <img 
+                      src="{{ prod.featured_image | image_url: width: 400 }}" 
+                      alt="{{ prod_title }}"
+                      class="shop-the-look__product-img"
+                      loading="lazy"
+                    >
+                  {% else %}
+                    <div class="shop-the-look__product-placeholder">
+                      {{ 'product-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg' }}
+                    </div>
+                  {% endif %}
+                </a>
+                <div class="shop-the-look__product-info">
+                  <h4 class="shop-the-look__product-title">
+                    <a href="{{ prod_url }}">{{ prod_title }}</a>
+                  </h4>
+                  <p class="shop-the-look__product-price">
+                    {{ prod_price }}
+                  </p>
+                  <a href="{{ prod_url }}" class="btn btn--primary shop-the-look__product-btn">
+                    View Product
+                  </a>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <!-- Slider dots -->
+        <div class="shop-the-look__dots">
+          {% for block in section.blocks %}
+            <button 
+              type="button" 
+              class="shop-the-look__dot {% if forloop.first %}is-active{% endif %}" 
+              data-stl-dot-index="{{ forloop.index0 }}"
+              aria-label="Go to slide {{ forloop.index }}"
+            ></button>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop the Look",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "SHOP OUR LOOKS"
+    },
+    {
+      "type": "richtext",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "<p>Some pieces come back. Some don't.</p><p>The ones that don't — people ask about them for months.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Lifestyle Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "hotspot",
+      "name": "Product Hotspot",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "range",
+          "id": "x_pos",
+          "label": "Horizontal Position (X)",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "default": 50,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "y_pos",
+          "label": "Vertical Position (Y)",
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "default": 50,
+          "unit": "%"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop the Look",
+      "blocks": [
+        { "type": "hotspot", "settings": { "x_pos": 33, "y_pos": 46 } },
+        { "type": "hotspot", "settings": { "x_pos": 45, "y_pos": 80 } },
+        { "type": "hotspot", "settings": { "x_pos": 61, "y_pos": 66 } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,139 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Skip to content",
+      "close": "Close",
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "meta": {
+      "tags": "Tagged \"{{ tags }}\"",
+      "page": "Page {{ page }}"
+    },
+    "breadcrumbs": {
+      "home": "Home"
+    },
+    "search": {
+      "placeholder": "Search our jewelry...",
+      "submit": "Search",
+      "no_results": "No results found for \"{{ terms }}\""
+    },
+    "social": {
+      "share_on_facebook": "Share on Facebook",
+      "share_on_twitter": "Share on Twitter",
+      "share_on_pinterest": "Pin it"
+    }
+  },
+  "collections": {
+    "general": {
+      "view_all": "View All",
+      "no_matches": "Sorry, there are no products in this collection."
+    },
+    "sorting": {
+      "title": "Sort by"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to Cart",
+      "sold_out": "Sold Out",
+      "unavailable": "Unavailable",
+      "quantity": "Quantity",
+      "sale": "Sale",
+      "from_price": "From {{ price }}",
+      "regular_price": "Regular price",
+      "sale_price": "Sale price",
+      "sku": "SKU",
+      "vendor": "Brand",
+      "type": "Type",
+      "view_details": "View Details",
+      "quick_view": "Quick View",
+      "add_to_wishlist": "Add to Wishlist"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Shopping Cart",
+      "empty": "Your cart is empty",
+      "continue_shopping": "Continue Shopping",
+      "subtotal": "Subtotal",
+      "checkout": "Checkout",
+      "view_cart": "View Cart",
+      "taxes_and_shipping": "Shipping & taxes calculated at checkout",
+      "remove": "Remove",
+      "quantity": "Quantity",
+      "update": "Update",
+      "free_shipping": "You've earned free shipping!",
+      "shipping_remaining": "You're {{ amount }} away from free shipping!"
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "My Account",
+      "orders": "Order History",
+      "addresses": "Addresses",
+      "details": "Account Details"
+    },
+    "login": {
+      "title": "Login",
+      "email": "Email",
+      "password": "Password",
+      "sign_in": "Sign In",
+      "forgot_password": "Forgot your password?",
+      "create_account": "Create Account"
+    },
+    "register": {
+      "title": "Create Account",
+      "first_name": "First Name",
+      "last_name": "Last Name",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Create"
+    },
+    "orders": {
+      "title": "Order History",
+      "order_number": "Order",
+      "date": "Date",
+      "payment_status": "Payment Status",
+      "fulfillment_status": "Fulfillment Status",
+      "total": "Total",
+      "none": "You haven't placed any orders yet."
+    },
+    "addresses": {
+      "title": "Your Addresses",
+      "add_new": "Add a New Address",
+      "edit": "Edit",
+      "delete": "Delete",
+      "default": "Default"
+    }
+  },
+  "newsletter": {
+    "label": "Email address",
+    "placeholder": "Enter your email",
+    "submit": "Subscribe",
+    "success": "Thank you for subscribing!",
+    "disclaimer": "By subscribing you agree to our terms & privacy policy."
+  },
+  "contact": {
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "message": "Message",
+      "submit": "Send Message",
+      "success": "Thanks for reaching out! We'll get back to you soon."
+    }
+  },
+  "gift_card": {
+    "title": "Gift Card",
+    "initial_value": "Gift card value: {{ value }}",
+    "remaining": "Remaining: {{ balance }}",
+    "expired": "Expired on {{ expiry }}",
+    "active": "Expires on {{ expiry }}",
+    "redeem": "Use this code at checkout:"
+  },
+  "date_formats": {
+    "month_day_year": "%B %d, %Y",
+    "abbreviated_date": "%b %d, %Y"
+  }
+}

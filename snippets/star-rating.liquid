@@ -1,0 +1,32 @@
+{% comment %}
+  Star Rating Snippet
+  Usage: {% render 'star-rating', rating: 4.5 %}
+{% endcomment %}
+
+{%- assign rating_decimal = rating | modulo: 1 -%}
+{%- assign rating_floor = rating | floor -%}
+{%- assign next_star = rating_floor | plus: 1 -%}
+
+<div class="star-rating" role="img" aria-label="{{ rating }} out of 5 stars">
+  {% for i in (1..5) %}
+    {% if i <= rating_floor %}
+      <svg class="star-rating__star star-rating__star--full" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+      </svg>
+    {% elsif i == next_star and rating_decimal > 0 %}
+      <svg class="star-rating__star star-rating__star--half" width="16" height="16" viewBox="0 0 24 24">
+        <defs>
+          <linearGradient id="half-star-{{ rating | replace: '.', '-' }}">
+            <stop offset="50%" stop-color="currentColor"/>
+            <stop offset="50%" stop-color="transparent"/>
+          </linearGradient>
+        </defs>
+        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="url(#half-star-{{ rating | replace: '.', '-' }})" stroke="currentColor" stroke-width="1"/>
+      </svg>
+    {% else %}
+      <svg class="star-rating__star star-rating__star--empty" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+      </svg>
+    {% endif %}
+  {% endfor %}
+</div>

@@ -1,0 +1,163 @@
+<section class="customer-page section">
+  <div class="container">
+    <div class="customer-form-wrapper">
+
+      <!-- Login Form Box -->
+      <div class="customer-form-box" id="CustomerLoginForm">
+        <div class="customer-form-box__header">
+          <p class="section__subtitle">Welcome Back</p>
+          <h1 class="section__title">Sign In</h1>
+        </div>
+
+        {% form 'customer_login' %}
+          {% if form.errors %}
+            <div class="form-error" role="alert">
+              {{ form.errors | default_errors }}
+            </div>
+          {% endif %}
+
+          <div class="form-group">
+            <label for="CustomerEmail" class="form-label">Email</label>
+            <input
+              type="email"
+              id="CustomerEmail"
+              name="customer[email]"
+              class="form-input"
+              autocomplete="email"
+              autocorrect="off"
+              autocapitalize="off"
+              placeholder="your@email.com"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="CustomerPassword" class="form-label">Password</label>
+            <input
+              type="password"
+              id="CustomerPassword"
+              name="customer[password]"
+              class="form-input"
+              autocomplete="current-password"
+              placeholder="••••••••"
+              required
+            >
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn--primary btn--full">Sign In</button>
+          </div>
+
+          <div class="form-links">
+            <a href="#recover" id="ShowRecoverPasswordLink" class="form-link">Forgot your password?</a>
+            <span class="form-links__divider">·</span>
+            <a href="/account/register" class="form-link">Create account</a>
+          </div>
+        {% endform %}
+      </div>
+
+      <!-- Recovery Password Form Box (Hidden by default) -->
+      <div class="customer-form-box" id="RecoverPasswordForm" style="display: none;">
+        <div class="customer-form-box__header">
+          <p class="section__subtitle">Reset Password</p>
+          <h1 class="section__title">Reset your password</h1>
+          <p class="form-description" style="font-size: 0.85rem; color: var(--color-text-light); margin-top: 0.5rem; text-align: center;">
+            We will send you an email to reset your password.
+          </p>
+        </div>
+
+        {% form 'recover_customer_password' %}
+          {% if form.errors %}
+            <div class="form-error" role="alert">
+              {{ form.errors | default_errors }}
+            </div>
+          {% endif %}
+
+          {% if form.posted_successfully? %}
+            <div class="form-success" role="alert" style="margin-bottom: 1.5rem; color: var(--color-primary); font-size: 0.9rem; text-align: center;">
+              We've sent you an email with a link to reset your password.
+            </div>
+          {% endif %}
+
+          <div class="form-group">
+            <label for="RecoverEmail" class="form-label">Email</label>
+            <input
+              type="email"
+              id="RecoverEmail"
+              name="email"
+              class="form-input"
+              autocomplete="email"
+              autocorrect="off"
+              autocapitalize="off"
+              placeholder="your@email.com"
+              required
+            >
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn--primary btn--full">Submit</button>
+          </div>
+
+          <div class="form-links" style="text-align: center;">
+            <a href="#login" id="HideRecoverPasswordLink" class="form-link">Cancel</a>
+          </div>
+        {% endform %}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    function initRecoveryForm() {
+      const loginForm = document.getElementById('CustomerLoginForm');
+      const recoverForm = document.getElementById('RecoverPasswordForm');
+      const showRecoverBtn = document.getElementById('ShowRecoverPasswordLink');
+      const hideRecoverBtn = document.getElementById('HideRecoverPasswordLink');
+
+      if (!loginForm || !recoverForm) return;
+
+      function showRecover() {
+        loginForm.style.display = 'none';
+        recoverForm.style.display = 'block';
+        window.location.hash = '#recover';
+      }
+
+      function hideRecover() {
+        loginForm.style.display = 'block';
+        recoverForm.style.display = 'none';
+        window.location.hash = '';
+      }
+
+      if (showRecoverBtn) {
+        showRecoverBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          showRecover();
+        });
+      }
+
+      if (hideRecoverBtn) {
+        hideRecoverBtn.addEventListener('click', function(e) {
+          e.preventDefault();
+          hideRecover();
+        });
+      }
+
+      // Check hash on load or redirect
+      if (window.location.hash === '#recover' || window.location.pathname.includes('/recover')) {
+        showRecover();
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initRecoveryForm);
+    } else {
+      initRecoveryForm();
+    }
+  })();
+</script>
+
+{% schema %}
+{ "name": "Login Template", "settings": [] }
+{% endschema %}

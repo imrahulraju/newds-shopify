@@ -1,0 +1,98 @@
+<section class="newsletter section" style="background-color: {{ section.settings.bg_color }};">
+  <div class="container">
+    <div class="newsletter__inner">
+      <div class="newsletter__content">
+        {% if section.settings.title != blank %}
+          <h2 class="newsletter__title">{{ section.settings.title }}</h2>
+        {% endif %}
+        {% if section.settings.subtitle != blank %}
+          <p class="newsletter__subtitle">{{ section.settings.subtitle }}</p>
+        {% endif %}
+      </div>
+
+      <div class="newsletter__form-wrapper">
+        {% form 'customer', class: 'newsletter__form' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="newsletter__field">
+            <input 
+              type="email" 
+              name="contact[email]" 
+              class="newsletter__input" 
+              placeholder="{{ section.settings.placeholder | default: 'Enter your email' }}"
+              required
+              aria-label="Email address"
+              autocomplete="email"
+            >
+            <button type="submit" class="newsletter__btn btn btn--primary">
+              {{ section.settings.button_text | default: 'Subscribe' }}
+            </button>
+          </div>
+          {% if form.errors %}
+            <p class="newsletter__error">{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</p>
+          {% endif %}
+          {% if form.posted_successfully? %}
+            <p class="newsletter__success">{{ section.settings.success_message | default: 'Thank you for subscribing!' }}</p>
+          {% endif %}
+        {% endform %}
+        {% if section.settings.disclaimer != blank %}
+          <p class="newsletter__disclaimer">{{ section.settings.disclaimer }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Join the Glow"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Subscribe for exclusive offers and new arrivals"
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Input placeholder",
+      "default": "Enter your email"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Subscribe"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": "Success message",
+      "default": "Thank you for subscribing!"
+    },
+    {
+      "type": "text",
+      "id": "disclaimer",
+      "label": "Disclaimer text",
+      "default": "By subscribing you agree to our terms & privacy policy."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#FFFFFF"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter"
+    }
+  ]
+}
+{% endschema %}

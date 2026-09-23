@@ -1,0 +1,129 @@
+<section class="cart-template section">
+  <div class="container">
+    <h1 class="cart-template__title">Shopping Cart</h1>
+
+    {% if cart.item_count > 0 %}
+      <div class="cart-template__inner">
+        <div class="cart-template__items">
+          <div class="cart-template__header">
+            <span class="cart-template__header-product">Product</span>
+            <span class="cart-template__header-price">Price</span>
+            <span class="cart-template__header-qty">Quantity</span>
+            <span class="cart-template__header-total">Total</span>
+          </div>
+
+          {% for item in cart.items %}
+            <div class="cart-item" data-cart-item data-line="{{ forloop.index }}">
+              <div class="cart-item__image">
+                <a href="{{ item.url }}">
+                  {% if item.image %}
+                    <img 
+                      src="{{ item.image | image_url: width: 120 }}"
+                      alt="{{ item.title }}"
+                      width="120"
+                      height="120"
+                      loading="lazy"
+                    >
+                  {% endif %}
+                </a>
+              </div>
+
+              <div class="cart-item__info">
+                <h3 class="cart-item__title">
+                  <a href="{{ item.url }}">{{ item.product.title }}</a>
+                </h3>
+                {% unless item.product.has_only_default_variant %}
+                  <p class="cart-item__variant">{{ item.variant.title }}</p>
+                {% endunless %}
+              </div>
+
+              <div class="cart-item__price">
+                {{ item.price | money }}
+              </div>
+
+              <div class="cart-item__quantity">
+                <div class="cart-item__qty-selector">
+                  <button type="button" class="cart-item__qty-btn" data-cart-qty-minus aria-label="Decrease quantity">-</button>
+                  <input 
+                    type="number" 
+                    value="{{ item.quantity }}" 
+                    min="0" 
+                    class="cart-item__qty-input" 
+                    data-cart-qty-input
+                    aria-label="Quantity"
+                  >
+                  <button type="button" class="cart-item__qty-btn" data-cart-qty-plus aria-label="Increase quantity">+</button>
+                </div>
+                <button class="cart-item__remove" data-cart-remove aria-label="Remove item">
+                  Remove
+                </button>
+              </div>
+
+              <div class="cart-item__total">
+                {{ item.line_price | money }}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+
+        <div class="cart-template__summary">
+          {% if settings.cart_show_free_shipping %}
+            {%- assign threshold = settings.cart_free_shipping_threshold | times: 100 -%}
+            {%- assign remaining = threshold | minus: cart.total_price -%}
+            <div class="cart-template__shipping-progress">
+              {% if remaining > 0 %}
+                <p>You're <strong>{{ remaining | money }}</strong> away from free shipping!</p>
+                {%- assign progress = cart.total_price | times: 100 | divided_by: threshold -%}
+                <div class="cart-template__progress-bar">
+                  <div class="cart-template__progress-fill" style="width: {{ progress }}%"></div>
+                </div>
+              {% else %}
+                <p class="cart-template__free-shipping">You've earned free shipping! 🎉</p>
+                <div class="cart-template__progress-bar">
+                  <div class="cart-template__progress-fill" style="width: 100%"></div>
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          <div class="cart-template__totals">
+            <div class="cart-template__subtotal">
+              <span>Subtotal</span>
+              <span data-cart-subtotal>{{ cart.total_price | money }}</span>
+            </div>
+            <p class="cart-template__taxes-note">Shipping & taxes calculated at checkout</p>
+          </div>
+
+          <div class="cart-template__checkout">
+            <button type="submit" name="checkout" class="btn btn--primary btn--full" form="cart-form">
+              Checkout
+            </button>
+            <a href="/collections/all" class="cart-template__continue">Continue Shopping</a>
+          </div>
+        </div>
+      </div>
+
+      <form id="cart-form" action="{{ routes.cart_url }}" method="post">
+        <!-- Cart form for checkout submission -->
+      </form>
+    {% else %}
+      <div class="cart-template__empty">
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="none">
+          <path d="M6 2L3 6V20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C19.5304 22 20.0391 21.7893 20.4142 21.4142C20.7893 21.0391 21 20.5304 21 20V6L18 2H6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M3 6H21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <path d="M16 10C16 11.0609 15.5786 12.0783 14.8284 12.8284C14.0783 13.5786 13.0609 14 12 14C10.9391 14 9.92172 13.5786 9.17157 12.8284C8.42143 12.0783 8 11.0609 8 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <h2>Your cart is empty</h2>
+        <p>Looks like you haven't added any jewelry to your cart yet.</p>
+        <a href="/collections/all" class="btn btn--primary">Start Shopping</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart Template",
+  "settings": []
+}
+{% endschema %}

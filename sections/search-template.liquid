@@ -1,0 +1,163 @@
+<section class="search-template section">
+  <div class="container">
+    <div class="search-template__header">
+      <p class="section__subtitle">Search Results</p>
+      {% if search.performed %}
+        <h1 class="section__title">
+          {{ search.results_count }} results for "{{ search.terms | escape }}"
+        </h1>
+      {% else %}
+        <h1 class="section__title">Search our store</h1>
+      {% endif %}
+    </div>
+
+    <!-- Search Form -->
+    <div class="search-template__bar">
+      <form action="{{ routes.search_url }}" method="get" class="search-template__form" role="search">
+        <input 
+          type="search" 
+          name="q" 
+          value="{{ search.terms | escape }}" 
+          class="search-template__input" 
+          placeholder="Search for jewelry, categories, sizes, colors..."
+          aria-label="Search"
+          autocomplete="off"
+        >
+        <button type="submit" class="btn btn--primary">Search</button>
+      </form>
+    </div>
+
+    {% if search.performed %}
+      {%- assign query_down = search.terms | downcase -%}
+      
+      <!-- 1. Matching Categories / Collections -->
+      {%- assign matched_collections_count = 0 -%}
+      {%- capture collections_html -%}
+        <div class="search-collections__grid">
+          {%- for col in collections -%}
+            {%- assign col_title_down = col.title | downcase -%}
+            {%- if col_title_down contains query_down and col.handle != 'frontpage' -%}
+              {%- assign matched_collections_count = matched_collections_count | plus: 1 -%}
+              <a href="{{ col.url }}" class="search-collection-card">
+                <span class="search-collection-card__title">{{ col.title }}</span>
+                <span class="search-collection-card__count">{{ col.all_products_count }} items</span>
+              </a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endcapture -%}
+
+      {%- if matched_collections_count > 0 -%}
+        <div class="search-section">
+          <h2 class="search-section__title">Matching Categories ({{ matched_collections_count }})</h2>
+          {{ collections_html }}
+        </div>
+      {%- endif -%}
+
+      <!-- 2. Matching Sizes & Colors Product Attributes -->
+      {%- assign matched_colors = "" -%}
+      {%- assign matched_sizes = "" -%}
+      {%- for item in search.results -%}
+        {%- if item.object_type == 'product' -%}
+          {%- for option in item.options_with_values -%}
+            {%- assign opt_name_down = option.name | downcase -%}
+            {%- if opt_name_down contains 'color' or opt_name_down contains 'colour' -%}
+              {%- for value in option.values -%}
+                {%- assign val_down = value | downcase -%}
+                {%- if val_down contains query_down -%}
+                  {%- unless matched_colors contains value -%}
+                    {%- assign matched_colors = matched_colors | append: "|" | append: value -%}
+                  {%- endunless -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- elsif opt_name_down contains 'size' -%}
+              {%- for value in option.values -%}
+                {%- assign val_down = value | downcase -%}
+                {%- if val_down contains query_down -%}
+                  {%- unless matched_sizes contains value -%}
+                    {%- assign matched_sizes = matched_sizes | append: "|" | append: value -%}
+                  {%- endunless -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endfor -%}
+      
+      {%- assign matched_colors_array = matched_colors | split: "|" -%}
+      {%- assign matched_sizes_array = matched_sizes | split: "|" -%}
+
+      {%- if matched_colors_array.size > 1 or matched_sizes_array.size > 1 -%}
+        <div class="search-section">
+          <h2 class="search-section__title">Matching Product Attributes</h2>
+          <div class="search-attributes__list">
+            {%- if matched_colors_array.size > 1 -%}
+              <div class="search-attributes__group">
+                <span class="search-attributes__label">Colors:</span>
+                <div class="search-attributes__pills">
+                  {%- for val in matched_colors_array -%}
+                    {%- if val != blank -%}
+                      <a href="/collections/all?filter.v.option.color={{ val | url_encode }}" class="search-attribute-pill">
+                        {{ val }}
+                      </a>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endif -%}
+
+            {%- if matched_sizes_array.size > 1 -%}
+              <div class="search-attributes__group" style="margin-top: 1rem;">
+                <span class="search-attributes__label">Sizes:</span>
+                <div class="search-attributes__pills">
+                  {%- for val in matched_sizes_array -%}
+                    {%- if val != blank -%}
+                      <a href="/collections/all?filter.v.option.size={{ val | url_encode }}" class="search-attribute-pill">
+                        {{ val }}
+                      </a>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </div>
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      <!-- 3. Matching Products -->
+      <div class="search-section">
+        {%- assign has_products = false -%}
+        {%- for item in search.results -%}
+          {%- if item.object_type == 'product' -%}
+            {%- assign has_products = true -%}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+
+        {% if has_products %}
+          <h2 class="search-section__title">Matching Products</h2>
+          <div class="product-grid product-grid--4">
+            {% for item in search.results %}
+              {% if item.object_type == 'product' %}
+                {% render 'product-card', product: item %}
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% else %}
+          {% if matched_collections_count == 0 and matched_colors_array.size <= 1 and matched_sizes_array.size <= 1 %}
+            <div class="search-template__empty">
+              <p>No products, categories, or options found matching your search. Try searching for general terms like "gold", "silver", "ring", or "necklace".</p>
+            </div>
+          {% endif %}
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Search Template",
+  "settings": []
+}
+{% endschema %}

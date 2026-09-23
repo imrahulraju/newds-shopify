@@ -1,0 +1,62 @@
+{% comment %}
+  CSS Variables - outputs theme settings as CSS custom properties
+{% endcomment %}
+
+<style>
+  :root {
+    /* Colors */
+    --color-primary: {{ settings.color_primary }};
+    --color-secondary: {{ settings.color_secondary }};
+    --color-accent: {{ settings.color_accent }};
+    --color-text: {{ settings.color_text }};
+    --color-text-light: {{ settings.color_text_light }};
+    --color-heading: {{ settings.color_heading }};
+    --color-background: {{ settings.color_background }};
+    --color-background-alt: {{ settings.color_background_alt }};
+    --color-button: {{ settings.color_button }};
+    --color-button-text: {{ settings.color_button_text }};
+    --color-border: #e8e8e8;
+    --color-star: #F5A623;
+    --color-success: #4CAF50;
+    --color-error: #E74C3C;
+
+    /* Typography */
+    --font-heading: 'Cormorant Garamond', Georgia, serif;
+    --font-heading-weight: 600;
+    --font-heading-style: normal;
+    --font-body: 'Jost', system-ui, sans-serif;
+    --font-body-weight: 400;
+    --font-body-style: normal;
+    --font-body-size: 15px;
+
+    /* Spacing */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2.5rem;
+    --spacing-xl: 4rem;
+    --spacing-2xl: 6rem;
+
+    /* Layout */
+    --container-width: 1400px;
+    --container-narrow: 900px;
+    --header-height: 80px;
+    --announcement-height: 40px;
+
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+    --radius-full: 9999px;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
+
+    /* Transitions */
+    --transition-fast: 150ms ease;
+    --transition-base: 300ms ease;
+    --transition-slow: 500ms ease;
+  }
+</style>

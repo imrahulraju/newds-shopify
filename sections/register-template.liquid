@@ -1,0 +1,56 @@
+<section class="customer-page section">
+  <div class="container">
+    <div class="customer-form-wrapper">
+
+      <div class="customer-form-box">
+        <div class="customer-form-box__header">
+          <p class="section__subtitle">Join Us</p>
+          <h1 class="section__title">Create Account</h1>
+        </div>
+
+        {% form 'create_customer' %}
+          {% if form.errors %}
+            <div class="form-error" role="alert">
+              {{ form.errors | default_errors }}
+            </div>
+          {% endif %}
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="FirstName" class="form-label">First Name</label>
+              <input type="text" id="FirstName" name="customer[first_name]" class="form-input" autocomplete="given-name" placeholder="Jane">
+            </div>
+            <div class="form-group">
+              <label for="LastName" class="form-label">Last Name</label>
+              <input type="text" id="LastName" name="customer[last_name]" class="form-input" autocomplete="family-name" placeholder="Doe">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="Email" class="form-label">Email</label>
+            <input type="email" id="Email" name="customer[email]" class="form-input" autocomplete="email" autocorrect="off" autocapitalize="off" placeholder="your@email.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="CreatePassword" class="form-label">Password</label>
+            <input type="password" id="CreatePassword" name="customer[password]" class="form-input" autocomplete="new-password" placeholder="Min. 5 characters" required>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn--primary btn--full">Create Account</button>
+          </div>
+
+          <div class="form-links">
+            <span>Already have an account?</span>
+            <a href="/account/login" class="form-link">Sign in</a>
+          </div>
+        {% endform %}
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Register Template", "settings": [] }
+{% endschema %}

@@ -1,0 +1,198 @@
+<section class="collection-list section">
+  <div class="container">
+    {% if section.settings.title != blank %}
+      <div class="section__header">
+        {% if section.settings.subtitle != blank %}
+          <p class="section__subtitle">{{ section.settings.subtitle }}</p>
+        {% endif %}
+        <h2 class="section__title">{{ section.settings.title }}</h2>
+      </div>
+    {% endif %}
+
+    <div class="collection-list__slider-container">
+      <button type="button" class="collection-list__arrow collection-list__arrow--prev" data-coll-prev aria-label="Previous collections">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="collection-list__slider collection-list__slider--{{ section.settings.columns }}-cols" data-collection-slider data-animate-grid>
+        {% for block in section.blocks %}
+          {%- assign block_collection = collections[block.settings.collection] -%}
+          <div class="collection-list__slider-item">
+            <a href="{{ block_collection.url | default: '#' }}" class="collection-list__item" {{ block.shopify_attributes }}>
+              <div class="collection-list__image-wrapper">
+                {% if block.settings.image != blank %}
+                  <img 
+                    src="{{ block.settings.image | image_url: width: 800 }}"
+                    srcset="{{ block.settings.image | image_url: width: 400 }} 400w,
+                            {{ block.settings.image | image_url: width: 800 }} 800w"
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    alt="{{ block.settings.title | default: block_collection.title }}"
+                    width="800"
+                    height="1000"
+                    loading="lazy"
+                    class="collection-list__image"
+                  >
+                {% elsif block_collection.image %}
+                  <img 
+                    src="{{ block_collection.image | image_url: width: 800 }}"
+                    alt="{{ block_collection.title }}"
+                    width="800"
+                    height="1000"
+                    loading="lazy"
+                    class="collection-list__image"
+                  >
+                {% else %}
+                  <div class="collection-list__placeholder">
+                    {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  </div>
+                {% endif %}
+              </div>
+              <div class="collection-list__info">
+                {% if block.settings.subheading != blank %}
+                  <p class="collection-list__subheading">{{ block.settings.subheading }}</p>
+                {% else %}
+                  <p class="collection-list__subheading">18K GOLD PLATED</p>
+                {% endif %}
+                <h3 class="collection-list__title-btn">
+                  {{ block.settings.title | default: block_collection.title | default: 'Collection' }}
+                </h3>
+              </div>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+
+      {% if section.blocks.size > 1 %}
+        <div class="collection-list__dots" data-collection-dots>
+          {% for block in section.blocks %}
+            <button
+              type="button"
+              class="collection-list__dot{% if forloop.first %} is-active{% endif %}"
+              data-coll-dot="{{ forloop.index0 }}"
+              aria-label="Go to collection {{ forloop.index }}"
+            ></button>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <button type="button" class="collection-list__arrow collection-list__arrow--next" data-coll-next aria-label="Next collections">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    function initCollSlider() {
+      const container = document.querySelector('.collection-list__slider-container');
+      if (!container) return;
+      const slider = container.querySelector('[data-collection-slider]');
+      const dots = container.querySelectorAll('[data-coll-dot]');
+      const items = container.querySelectorAll('.collection-list__slider-item');
+      if (!slider || !dots.length) return;
+
+      slider.addEventListener('scroll', function() {
+        const itemWidth = items[0] ? items[0].offsetWidth : slider.offsetWidth;
+        if (!itemWidth) return;
+        const index = Math.round(slider.scrollLeft / itemWidth);
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('is-active', i === index);
+        });
+      }, { passive: true });
+
+      dots.forEach((dot, i) => {
+        dot.addEventListener('click', function() {
+          const itemWidth = items[0] ? items[0].offsetWidth : slider.offsetWidth;
+          slider.scrollTo({ left: i * itemWidth, behavior: 'smooth' });
+        });
+      });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initCollSlider);
+    } else {
+      initCollSlider();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Collection List",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Collections"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Explore our curated collections"
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Columns",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_count",
+      "label": "Show product count",
+      "default": false
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection",
+      "name": "Collection",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Custom image (optional)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Custom title (optional)"
+        },
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading (optional)",
+          "default": "18K GOLD PLATED"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Collection List",
+      "blocks": [
+        { "type": "collection" },
+        { "type": "collection" },
+        { "type": "collection" }
+      ]
+    }
+  ]
+}
+{% endschema %}

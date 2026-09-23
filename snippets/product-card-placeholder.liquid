@@ -1,0 +1,19 @@
+{% comment %}
+  Product Card Placeholder - shown when no collection is selected
+{% endcomment %}
+
+<div class="product-card product-card--placeholder">
+  <div class="product-card__media">
+    <div class="product-card__placeholder">
+      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    </div>
+  </div>
+  <div class="product-card__info">
+    <h3 class="product-card__title">
+      <a href="#">Product Title</a>
+    </h3>
+    <div class="product-card__price">
+      <span class="product-card__price-regular">$29.99</span>
+    </div>
+  </div>
+</div>

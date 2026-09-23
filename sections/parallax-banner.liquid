@@ -1,0 +1,102 @@
+<section class="parallax-banner" id="parallax-{{ section.id }}" style="min-height: {{ section.settings.section_height }}px;">
+  <!-- Parallax Background Container -->
+  <div class="parallax-banner__bg-wrapper">
+    {% if section.settings.image != blank %}
+      <img 
+        src="{{ section.settings.image | image_url: width: 2000 }}"
+        srcset="{{ section.settings.image | image_url: width: 768 }} 768w,
+                {{ section.settings.image | image_url: width: 1200 }} 1200w,
+                {{ section.settings.image | image_url: width: 2000 }} 2000w"
+        sizes="100vw"
+        alt="{{ section.settings.heading | default: 'Parallax banner' }}"
+        class="parallax-banner__bg-image"
+        loading="lazy"
+      >
+    {% else %}
+      <div class="parallax-banner__placeholder">
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- Overlay -->
+  {% if section.settings.overlay_opacity > 0 %}
+    <div class="parallax-banner__overlay" style="opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};"></div>
+  {% endif %}
+
+  <!-- Centered Content Card -->
+  <div class="container parallax-banner__container">
+    <div class="parallax-banner__card">
+      {% if section.settings.heading != blank %}
+        <h3 class="parallax-banner__title">{{ section.settings.heading }}</h3>
+      {% endif %}
+      {% if section.settings.text != blank %}
+        <div class="parallax-banner__text">{{ section.settings.text }}</div>
+      {% endif %}
+      {% if section.settings.button_text != blank %}
+        <a href="{{ section.settings.button_link | default: '/collections/all' }}" class="btn btn--primary parallax-banner__btn">
+          {{ section.settings.button_text }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Parallax Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Open the box like it's yours"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text Content",
+      "default": "<p>Watch someone open it like it's theirs Either way, nobody forgets that moment</p><p>Every order ships gift-ready — no extra step, no extra cost.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 90,
+      "step": 10,
+      "default": 0,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "section_height",
+      "label": "Section height (px)",
+      "min": 300,
+      "max": 800,
+      "step": 50,
+      "default": 500
+    }
+  ],
+  "presets": [
+    {
+      "name": "Parallax Banner"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,70 @@
+<section class="brand-statement section" id="brand-statement-{{ section.id }}">
+  <div class="container container--narrow">
+    <div class="brand-statement__inner">
+      {% if section.settings.title != blank %}
+        <h2 class="brand-statement__title">{{ section.settings.title }}</h2>
+      {% endif %}
+
+      <div class="brand-statement__body">
+        {% if section.settings.line_1 != blank %}
+          <p class="brand-statement__line">{{ section.settings.line_1 }}</p>
+        {% endif %}
+
+        {% if section.settings.line_2 != blank %}
+          <p class="brand-statement__line">{{ section.settings.line_2 }}</p>
+        {% endif %}
+
+        {% if section.settings.line_3 != blank %}
+          <p class="brand-statement__line">{{ section.settings.line_3 }}</p>
+        {% endif %}
+
+        {% if section.settings.closing_text != blank %}
+          <p class="brand-statement__closing">{{ section.settings.closing_text }}</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Brand Statement",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "DETAIL MATTERS"
+    },
+    {
+      "type": "text",
+      "id": "line_1",
+      "label": "Statement Line 1",
+      "default": "The clasp that doesn't catch your hair"
+    },
+    {
+      "type": "text",
+      "id": "line_2",
+      "label": "Statement Line 2",
+      "default": "The weight that whisper quality"
+    },
+    {
+      "type": "textarea",
+      "id": "line_3",
+      "label": "Statement Line 3",
+      "default": "The piece your friend notices first — without you saying a word."
+    },
+    {
+      "type": "text",
+      "id": "closing_text",
+      "label": "Closing Statement",
+      "default": "That's what we design for."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Brand Statement"
+    }
+  ]
+}
+{% endschema %}

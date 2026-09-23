@@ -1,0 +1,549 @@
+<style>
+  /* Global Header: Hamburger menu active across all viewports */
+  .header__inner {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+
+  .header__nav {
+    display: none !important;
+  }
+
+  .header__menu-toggle {
+    display: flex !important;
+  }
+
+  .header__logo {
+    position: absolute !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    margin: 0 !important;
+    z-index: 2;
+  }
+
+  /* Desktop Viewport (>= 991px): Fixed-width 440px Side Drawer + Top Profile & Cart Icons */
+  @media (min-width: 991px) {
+    .header__actions a[href*="account"],
+    .header__actions a[href*="cart"],
+    .header__actions .header__cart-btn,
+    .header__action-btn--account {
+      display: flex !important;
+    }
+
+    .mobile-menu {
+      background: rgba(0, 0, 0, 0.45) !important;
+      backdrop-filter: blur(4px) !important;
+      -webkit-backdrop-filter: blur(4px) !important;
+    }
+
+    .mobile-menu__inner {
+      position: absolute !important;
+      top: 0 !important;
+      left: 0 !important;
+      width: 440px !important;
+      max-width: 85vw !important;
+      height: 100vh !important;
+      height: 100dvh !important;
+      background: var(--color-background) !important;
+      box-shadow: 12px 0 40px rgba(0, 0, 0, 0.2) !important;
+      transform: translateX(-100%) !important;
+      transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      overflow-y: auto !important;
+      -webkit-overflow-scrolling: touch !important;
+    }
+
+    .mobile-menu.is-open .mobile-menu__inner {
+      transform: translateX(0) !important;
+    }
+  }
+
+  /* Mobile Viewport (<= 990px): Fullscreen Menu + Top Profile & Cart Hidden (In Bottom Bar) */
+  @media (max-width: 990px) {
+    .header__actions a[href*="account"],
+    .header__actions a[href*="cart"],
+    .header__actions .header__cart-btn,
+    .header__action-btn--account {
+      display: none !important;
+    }
+
+    .mobile-menu {
+      background: var(--color-background) !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+    }
+
+    .mobile-menu__inner {
+      width: 100% !important;
+      max-width: 100vw !important;
+      height: 100vh !important;
+      height: 100dvh !important;
+      box-shadow: none !important;
+      transform: scale(0.97) translateY(-10px) !important;
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    .mobile-menu.is-open .mobile-menu__inner {
+      transform: scale(1) translateY(0) !important;
+    }
+  }
+</style>
+
+<header class="header {% if section.settings.sticky_header %}header--sticky{% endif %}" data-header>
+  <div class="container">
+    <div class="header__inner">
+      <!-- Mobile Menu Toggle -->
+      <button class="header__menu-toggle" data-mobile-menu-toggle aria-label="Open menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <!-- Navigation (Desktop) -->
+      <nav class="header__nav" role="navigation" aria-label="Main navigation">
+        <ul class="header__nav-list">
+          {% for link in linklists[section.settings.menu].links %}
+            {%- assign is_catalog = false -%}
+            {%- if link.url == '/collections/all' or link.title == 'Catalog' -%}
+              {%- assign is_catalog = true -%}
+            {%- endif -%}
+
+            {%- if is_catalog -%}
+              <!-- Products Link -->
+              <li class="header__nav-item">
+                <a href="{{ link.url }}" class="header__nav-link {% if link.active %}is-active{% endif %}">
+                  Products
+                </a>
+              </li>
+
+              <!-- Categories Dropdown Link pointing to /collections -->
+              <li class="header__nav-item has-dropdown">
+                <a href="/collections" class="header__nav-link">
+                  Categories
+                  <svg class="dropdown-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none" style="margin-left: 4px; transition: transform var(--transition-fast);">
+                    <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+                <div class="header__dropdown">
+                  <ul class="header__dropdown-list">
+                    {% for collection in collections %}
+                      {% unless collection.handle == 'frontpage' %}
+                        <li class="header__dropdown-item">
+                          <a href="{{ collection.url }}" class="header__dropdown-link">
+                            {{ collection.title }}
+                          </a>
+                        </li>
+                      {% endunless %}
+                    {% endfor %}
+                  </ul>
+                </div>
+              </li>
+            {%- else -%}
+              <li class="header__nav-item{% if link.links.size > 0 %} has-dropdown{% endif %}">
+                <a href="{{ link.url }}" class="header__nav-link {% if link.active %}is-active{% endif %}">
+                  {{ link.title }}
+                </a>
+                {% if link.links.size > 0 %}
+                  <div class="header__dropdown">
+                    <ul class="header__dropdown-list">
+                      {% for child_link in link.links %}
+                        <li class="header__dropdown-item">
+                          <a href="{{ child_link.url }}" class="header__dropdown-link">
+                            {{ child_link.title }}
+                          </a>
+                        </li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                {% endif %}
+              </li>
+            {%- endif -%}
+          {% endfor %}
+        </ul>
+      </nav>
+
+      <!-- Logo -->
+      <div class="header__logo">
+        <a href="/" class="header__logo-link">
+          {% if section.settings.logo != blank %}
+            <img 
+              src="{{ section.settings.logo | image_url: width: 200 }}" 
+              alt="{{ shop.name }}"
+              width="200"
+              height="auto"
+              class="header__logo-img"
+              loading="eager"
+            >
+          {% else %}
+            <span class="header__logo-text">{{ shop.name }}</span>
+          {% endif %}
+        </a>
+      </div>
+
+      <!-- Header Actions -->
+      <div class="header__actions">
+        <button class="header__action-btn" data-search-toggle aria-label="Search">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M16 16L20 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <a href="{{ routes.account_url }}" class="header__action-btn header__action-btn--account" aria-label="Account">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="8" r="4" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M4 20C4 17 7.5 14 12 14C16.5 14 20 17 20 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </a>
+
+        <a href="{{ routes.cart_url }}" class="header__action-btn header__cart-btn" data-cart-toggle aria-label="Cart">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M6 2L3 6V20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C19.5304 22 20.0391 21.7893 20.4142 21.4142C20.7893 21.0391 21 20.5304 21 20V6L18 2H6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M3 6H21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M16 10C16 11.0609 15.5786 12.0783 14.8284 12.8284C14.0783 13.5786 13.0609 14 12 14C10.9391 14 9.92172 13.5786 9.17157 12.8284C8.42143 12.0783 8 11.0609 8 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span class="header__cart-count" data-cart-count>{{ cart.item_count }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Search Overlay -->
+  <div class="header__search-overlay" data-search-overlay aria-hidden="true">
+    <div class="container" style="position: relative;">
+      <form action="{{ routes.search_url }}" method="get" class="header__search-form" role="search">
+        <input 
+          type="search" 
+          name="q" 
+          class="header__search-input" 
+          placeholder="Search our jewelry (e.g. gold, ring, earrings)..."
+          aria-label="Search"
+          autocomplete="off"
+          data-search-input
+        >
+        <button type="submit" class="header__search-submit" aria-label="Submit search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M16 16L20 20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+        <button type="button" class="header__search-close" data-search-close aria-label="Close search">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </form>
+
+      <!-- Predictive live search results dropdown container -->
+      <div class="header__predictive-search" data-predictive-search style="display: none;">
+        <div class="predictive-search__inner">
+          <div class="predictive-search__loading" style="display: none;">
+            <div class="spinner"></div>
+          </div>
+          <div class="predictive-search__results" data-predictive-results></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" data-mobile-menu aria-hidden="true">
+    <div class="mobile-menu__inner">
+
+      <!-- Logo at top -->
+      <a href="/" class="mobile-menu__logo">
+        {% if section.settings.logo != blank %}
+          <img
+            src="{{ section.settings.logo | image_url: width: 200 }}"
+            alt="{{ shop.name }}"
+            class="mobile-menu__logo-img"
+            width="200"
+            loading="lazy"
+          >
+        {% else %}
+          <span class="mobile-menu__logo-text">{{ shop.name }}</span>
+        {% endif %}
+      </a>
+
+      <!-- Menu header row -->
+      <div class="mobile-menu__header">
+        <span class="mobile-menu__title">Navigation</span>
+        <button class="mobile-menu__close" data-mobile-menu-close aria-label="Close menu">
+          <svg width="24" height="24" viewBox="0 0 20 20" fill="none">
+            <path d="M15 5L5 15M5 5L15 15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <nav class="mobile-menu__nav" role="navigation" aria-label="Mobile navigation">
+        <ul class="mobile-menu__list">
+          {% for link in linklists[section.settings.menu].links %}
+            {%- assign is_catalog = false -%}
+            {%- if link.url == '/collections/all' or link.title == 'Catalog' -%}
+              {%- assign is_catalog = true -%}
+            {%- endif -%}
+
+            {%- if is_catalog -%}
+              <!-- Products Mobile Link -->
+              <li class="mobile-menu__item">
+                <a href="{{ link.url }}" class="mobile-menu__link">Products</a>
+              </li>
+
+              <!-- Categories Mobile Link (Accordion) -->
+              <li class="mobile-menu__item" data-mobile-menu-item>
+                <div class="mobile-menu__row">
+                  <a href="/collections" class="mobile-menu__link">Categories</a>
+                  <button type="button" class="mobile-menu__toggle-btn" data-mobile-menu-trigger aria-label="Toggle Categories">
+                    <span class="mobile-menu__icon">+</span>
+                  </button>
+                </div>
+                <ul class="mobile-menu__sublist" data-mobile-menu-sublist>
+                  {% for collection in collections %}
+                    {% unless collection.handle == 'frontpage' %}
+                      <li class="mobile-menu__subitem">
+                        <a href="{{ collection.url }}" class="mobile-menu__sublink">{{ collection.title }}</a>
+                      </li>
+                    {% endunless %}
+                  {% endfor %}
+                </ul>
+              </li>
+            {%- else -%}
+              {% if link.links.size > 0 %}
+                <!-- Standard Accordion Mobile Link -->
+                <li class="mobile-menu__item" data-mobile-menu-item>
+                  <div class="mobile-menu__row">
+                    <a href="{{ link.url }}" class="mobile-menu__link">{{ link.title }}</a>
+                    <button type="button" class="mobile-menu__toggle-btn" data-mobile-menu-trigger aria-label="Toggle {{ link.title }}">
+                      <span class="mobile-menu__icon">+</span>
+                    </button>
+                  </div>
+                  <ul class="mobile-menu__sublist" data-mobile-menu-sublist>
+                    {% for child_link in link.links %}
+                      <li class="mobile-menu__subitem">
+                        <a href="{{ child_link.url }}" class="mobile-menu__sublink">{{ child_link.title }}</a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </li>
+              {% else %}
+                <!-- Single Mobile Link -->
+                <li class="mobile-menu__item">
+                  <a href="{{ link.url }}" class="mobile-menu__link">{{ link.title }}</a>
+                </li>
+              {% endif %}
+            {%- endif -%}
+          {% endfor %}
+        </ul>
+      </nav>
+
+      <!-- Secondary Utility Navigation (Mobile Only) -->
+      <div class="mobile-menu__utility">
+        <ul class="mobile-menu__utility-list">
+          <li class="mobile-menu__utility-item">
+            <button type="button" class="mobile-menu__utility-link" data-menu-search>SEARCH</button>
+          </li>
+          <li class="mobile-menu__utility-item">
+            <a href="/pages/about-us" class="mobile-menu__utility-link">ABOUT US</a>
+          </li>
+          <li class="mobile-menu__utility-item">
+            <a href="/pages/contact" class="mobile-menu__utility-link">CONTACT US</a>
+          </li>
+          <li class="mobile-menu__utility-item">
+            <a href="/policies/privacy-policy" class="mobile-menu__utility-link">PRIVACY RIGHTS</a>
+          </li>
+          <li class="mobile-menu__utility-item">
+            <a href="/policies/shipping-policy" class="mobile-menu__utility-link">SHIPPING</a>
+          </li>
+          <li class="mobile-menu__utility-item">
+            <a href="/policies/refund-policy" class="mobile-menu__utility-link">RETURNS</a>
+          </li>
+          <li class="mobile-menu__utility-item">
+            <a href="/policies/terms-of-service" class="mobile-menu__utility-link">SERVICE TERMS</a>
+          </li>
+          <li class="mobile-menu__utility-item">
+            <a href="/pages/size-fit" class="mobile-menu__utility-link">SIZE & FIT</a>
+          </li>
+          <li class="mobile-menu__utility-item">
+            <a href="/pages/jewellery-care" class="mobile-menu__utility-link">JEWELLERY CARE</a>
+          </li>
+          <li class="mobile-menu__utility-item">
+            <a href="/pages/faq" class="mobile-menu__utility-link">HELP & FAQ</a>
+          </li>
+        </ul>
+      </div>
+
+    </div><!-- /.mobile-menu__inner -->
+  </div>
+  <!-- Mobile Menu Backdrop -->
+  <div class="mobile-menu-backdrop" data-mobile-menu-backdrop></div>
+</header>
+
+<script>
+  (function() {
+    function initHeaderInline() {
+      // Hamburger Menu
+      const menuToggle = document.querySelector('[data-mobile-menu-toggle]');
+      const mobileMenu = document.querySelector('[data-mobile-menu]');
+      const menuClose = document.querySelector('[data-mobile-menu-close]');
+      const menuBackdrop = document.querySelector('[data-mobile-menu-backdrop]');
+
+      if (menuToggle && mobileMenu) {
+        menuToggle.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          mobileMenu.classList.add('is-open');
+          mobileMenu.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+        });
+      }
+
+      const closeMenu = function(e) {
+        if (e) {
+          e.preventDefault();
+          e.stopPropagation();
+        }
+        mobileMenu.classList.remove('is-open');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+
+        // Reset accordion sublists
+        document.querySelectorAll('[data-mobile-menu-sublist]').forEach(sub => {
+          sub.style.maxHeight = '0px';
+        });
+        document.querySelectorAll('[data-mobile-menu-trigger]').forEach(btn => {
+          btn.setAttribute('aria-expanded', 'false');
+          const icon = btn.querySelector('.mobile-menu__icon');
+          if (icon) icon.textContent = '+';
+        });
+      };
+
+      if (menuClose && mobileMenu) {
+        menuClose.addEventListener('click', closeMenu);
+      }
+
+      // Clicking the dark overlay (but not the inner card) closes the menu
+      if (mobileMenu) {
+        mobileMenu.addEventListener('click', function(e) {
+          const inner = mobileMenu.querySelector('.mobile-menu__inner');
+          if (inner && !inner.contains(e.target)) {
+            closeMenu(e);
+          }
+        });
+      }
+
+      // Mobile Menu Accordion Toggles
+      document.querySelectorAll('[data-mobile-menu-trigger]').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          const item = btn.closest('[data-mobile-menu-item]');
+          if (!item) return;
+
+          const sublist = item.querySelector('[data-mobile-menu-sublist]');
+          const icon = btn.querySelector('.mobile-menu__icon');
+
+          if (sublist) {
+            const isOpen = sublist.style.maxHeight && sublist.style.maxHeight !== '0px';
+            if (isOpen) {
+              sublist.style.maxHeight = '0px';
+              btn.setAttribute('aria-expanded', 'false');
+              if (icon) icon.textContent = '+';
+            } else {
+              sublist.style.maxHeight = sublist.scrollHeight + 'px';
+              btn.setAttribute('aria-expanded', 'true');
+              if (icon) icon.textContent = '−'; // Minus symbol
+            }
+          }
+        });
+      });
+
+      // Search Overlay
+      const searchToggle = document.querySelector('[data-search-toggle]');
+      const searchOverlay = document.querySelector('[data-search-overlay]');
+      const searchClose = document.querySelector('[data-search-close]');
+
+      if (searchToggle && searchOverlay) {
+        searchToggle.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          searchOverlay.classList.toggle('is-open');
+          const isOpen = searchOverlay.classList.contains('is-open');
+          searchOverlay.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+          if (isOpen) {
+            const input = searchOverlay.querySelector('input');
+            if (input) setTimeout(() => input.focus(), 100);
+          }
+        });
+      }
+
+      if (searchClose && searchOverlay) {
+        searchClose.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          searchOverlay.classList.remove('is-open');
+          searchOverlay.setAttribute('aria-hidden', 'true');
+        });
+      }
+
+      // Mobile Menu Search Button
+      const menuSearch = document.querySelector('[data-menu-search]');
+      if (menuSearch && searchOverlay) {
+        menuSearch.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          closeMenu();
+          setTimeout(() => {
+            searchOverlay.classList.add('is-open');
+            searchOverlay.setAttribute('aria-hidden', 'false');
+            const input = searchOverlay.querySelector('input');
+            if (input) setTimeout(() => input.focus(), 100);
+          }, 150);
+        });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initHeaderInline);
+    } else {
+      initHeaderInline();
+    }
+  })();
+</script>
+
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "label": "Logo width",
+      "min": 80,
+      "max": 300,
+      "step": 10,
+      "default": 160,
+      "unit": "px"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Navigation menu",
+      "default": "main-menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "sticky_header",
+      "label": "Enable sticky header",
+      "default": true
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,111 @@
+<section class="new-arrivals section">
+  <div class="container">
+    {% if section.settings.title != blank %}
+      <div class="section__header">
+        {% if section.settings.subtitle != blank %}
+          <p class="section__subtitle">{{ section.settings.subtitle }}</p>
+        {% endif %}
+        <h2 class="section__title">{{ section.settings.title }}</h2>
+      </div>
+    {% endif %}
+
+    {%- assign collection = collections[section.settings.collection] -%}
+    {%- assign limit = section.settings.products_to_show -%}
+
+    <div class="new-arrivals__slider-container">
+      <button type="button" class="new-arrivals__arrow new-arrivals__arrow--prev" data-na-prev aria-label="Previous products">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="new-arrivals__slider" data-new-arrivals-slider data-animate-grid>
+        {% if collection != blank %}
+          {% for product in collection.products limit: limit %}
+            <div class="new-arrivals__slider-item">
+              {% render 'product-card', product: product, show_sale_badge: section.settings.show_sale_badge %}
+            </div>
+          {% endfor %}
+        {% else %}
+          {% for i in (1..limit) %}
+            <div class="new-arrivals__slider-item">
+              {% render 'product-card-placeholder' %}
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+
+      <button type="button" class="new-arrivals__arrow new-arrivals__arrow--next" data-na-next aria-label="Next products">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    {% if section.settings.show_view_all and collection != blank %}
+      <div class="section__footer">
+        <a href="{{ collection.url }}" class="btn btn--primary" style="padding: 0.85rem 2.5rem; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.1em; font-weight: 600;">
+          {{ section.settings.button_label | default: 'EXPLORE NEW' }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "New Arrivals",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "NEW IN"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Our latest additions"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "checkbox",
+      "id": "show_sale_badge",
+      "label": "Show sale badge",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show view all button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button label",
+      "default": "EXPLORE NEW"
+    }
+  ],
+  "presets": [
+    {
+      "name": "New Arrivals",
+      "category": "Collection"
+    }
+  ]
+}
+{% endschema %}

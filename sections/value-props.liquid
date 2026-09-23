@@ -1,0 +1,168 @@
+<section class="value-props section" style="background-color: {{ section.settings.bg_color }};">
+  <div class="container">
+    <div class="value-props__slider-wrapper">
+      <div class="value-props__grid" data-value-props-slider>
+      {% for block in section.blocks %}
+        <div class="value-props__item" {{ block.shopify_attributes }}>
+          <div class="value-props__icon-wrapper">
+            {% if block.settings.icon_svg != blank %}
+              {{ block.settings.icon_svg }}
+            {% else %}
+              {% if block.settings.icon_type == 'shield' %}
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+              {% elsif block.settings.icon_type == 'gift' %}
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="8" width="18" height="4" rx="1"/>
+                  <path d="M12 8v13"/>
+                  <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/>
+                  <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 4.8 0 0 1 12 8a4.8 4.8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/>
+                </svg>
+              {% else %}
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/>
+                </svg>
+              {% endif %}
+            {% endif %}
+          </div>
+          {% if block.settings.title != blank %}
+            <h3 class="value-props__title">{{ block.settings.title }}</h3>
+          {% endif %}
+          {% if block.settings.text != blank %}
+            <p class="value-props__text">{{ block.settings.text }}</p>
+          {% endif %}
+
+          {% if block.settings.custom_image != blank %}
+            <div class="value-props__custom-image-wrap">
+              <img
+                src="{{ block.settings.custom_image | image_url: width: 500 }}"
+                alt="{{ block.settings.title | default: 'Value Prop' | escape }}"
+                width="500"
+                height="auto"
+                loading="lazy"
+                class="value-props__custom-image-mobile"
+              >
+            </div>
+          {% elsif block.settings.show_payment_icons %}
+            <div class="value-props__payments-mobile">
+              {%- assign payment_icons = 'american_express,apple_pay,google_pay,master,shopify_pay,visa' | split: ',' -%}
+              {% for icon in payment_icons %}
+                <span class="value-props__pay-icon">{{ icon | payment_type_svg_tag }}</span>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+      </div>
+      {% if section.blocks.size > 1 %}
+        <div class="value-props__dots" data-value-props-dots>
+          {% for block in section.blocks %}
+            <button
+              type="button"
+              class="value-props__dot{% if forloop.first %} is-active{% endif %}"
+              data-value-props-dot="{{ forloop.index0 }}"
+              aria-label="Go to slide {{ forloop.index }}"
+            ></button>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Value Propositions",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "proposition",
+      "name": "Value Proposition",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon_type",
+          "label": "Icon type",
+          "options": [
+            { "value": "shield", "label": "Shield" },
+            { "value": "gift", "label": "Gift" },
+            { "value": "returns", "label": "Circular Arrow (Returns)" }
+          ],
+          "default": "shield"
+        },
+        {
+          "type": "html",
+          "id": "icon_svg",
+          "label": "Custom SVG Icon (Optional)",
+          "info": "Overrides the default icons. Paste raw SVG code here."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description text",
+          "default": "Add details about this feature here."
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom Image (Mobile)",
+          "info": "Upload a custom image (e.g. payment icons image) to show below text on mobile."
+        },
+        {
+          "type": "checkbox",
+          "id": "show_payment_icons",
+          "label": "Show Default Payment Icons (Mobile)",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Value Propositions",
+      "blocks": [
+        {
+          "type": "proposition",
+          "settings": {
+            "icon_type": "shield",
+            "title": "SHOP WITH CONFIDENCE",
+            "text": "All payments are securely processed, so you can focus on enjoying your ElyvaraCo jewellery.",
+            "show_payment_icons": true
+          }
+        },
+        {
+          "type": "proposition",
+          "settings": {
+            "icon_type": "gift",
+            "title": "PREMIUM PACKAGING",
+            "text": "Each piece arrives beautifully packaged, ready to gift or keep as something special."
+          }
+        },
+        {
+          "type": "proposition",
+          "settings": {
+            "icon_type": "returns",
+            "title": "EASY RETURNS",
+            "text": "Changed your mind? We offer a simple and hassle-free return process for your peace of mind."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

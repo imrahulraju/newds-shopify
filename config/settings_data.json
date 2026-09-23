@@ -1,0 +1,92 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "color_primary": "#C9A96E",
+    "color_secondary": "#F5F0EB",
+    "color_accent": "#D4AF37",
+    "color_text": "#333333",
+    "color_text_light": "#666666",
+    "color_heading": "#1a1a1a",
+    "color_background": "#FFFFFF",
+    "color_background_alt": "#F9F7F4",
+    "color_button": "#cb9635",
+    "color_button_text": "#FFFFFF",
+    "category_1_name": "Necklaces",
+    "category_2_name": "Bracelets",
+    "category_3_name": "Earrings",
+    "category_4_name": "Rings",
+    "category_5_name": "Anklets",
+    "category_6_name": "Gift Sets",
+    "cart_type": "drawer",
+    "cart_show_free_shipping": true,
+    "cart_free_shipping_threshold": "75",
+    "sections": {
+      "header": {
+        "type": "header",
+        "custom_css": [
+          ".header__logo-img {height: 74px; width: auto;}",
+          ".header {background: #fef9f9;}"
+        ],
+        "settings": {
+          "logo": "shopify://shop_images/image_2_1.png",
+          "logo_width": 80,
+          "menu": "main-menu-v2",
+          "sticky_header": true
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "brand_title": "ELYVARACO",
+          "brand_tagline": "Timeless elegance, crafted for you.",
+          "brand_desc": "Discover curated collections of ethically sourced, artisanal fine jewelry. Each piece tells a story of timeless beauty.",
+          "contact_email": "info@elyvaraco.com",
+          "menu_left": "",
+          "show_payment_icons": true
+        }
+      },
+      "announcement-bar": {
+        "type": "announcement-bar",
+        "settings": {
+          "show_announcement": true,
+          "text": "Free U.S. Shipping on Orders Over $100 🇺🇸",
+          "link": "",
+          "bg_color": "#f5f0eb",
+          "text_color": "#333333"
+        }
+      },
+      "list-collections-template": {
+        "type": "list-collections-template",
+        "settings": {}
+      },
+      "collection-banner": {
+        "type": "collection-banner",
+        "settings": {}
+      },
+      "collection-template": {
+        "type": "collection-template",
+        "settings": {
+          "products_per_page": 12,
+          "columns": "3"
+        }
+      },
+      "cart-drawer": {
+        "type": "cart-drawer",
+        "settings": {}
+      },
+      "mobile-bottom-nav": {
+        "type": "mobile-bottom-nav",
+        "settings": {}
+      }
+    },
+    "content_for_index": []
+  }
+}

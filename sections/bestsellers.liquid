@@ -1,0 +1,156 @@
+<section class="bestsellers section">
+  <div class="container">
+    {% if section.settings.title != blank %}
+      <div class="section__header">
+        {% if section.settings.subtitle != blank %}
+          <p class="section__subtitle">{{ section.settings.subtitle }}</p>
+        {% endif %}
+        <h2 class="section__title">{{ section.settings.title }}</h2>
+      </div>
+    {% endif %}
+
+    <!-- Category Tabs -->
+    {% if section.settings.show_tabs %}
+      <div class="bestsellers__tabs" role="tablist">
+        <button class="bestsellers__tab is-active" data-tab-btn="all" role="tab" aria-selected="true">
+          All
+        </button>
+        {% for block in section.blocks %}
+          {% if block.type == 'tab' %}
+            <button class="bestsellers__tab" data-tab-btn="{{ block.settings.collection }}" role="tab" aria-selected="false" {{ block.shopify_attributes }}>
+              {{ block.settings.title }}
+            </button>
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {%- assign collection = collections[section.settings.collection] -%}
+    {%- assign limit = section.settings.products_to_show -%}
+
+    <div class="bestsellers__slider-container">
+      <button type="button" class="bestsellers__arrow bestsellers__arrow--prev" data-best-prev aria-label="Previous products">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="bestsellers__slider" data-bestsellers-slider data-animate-grid>
+        {% if collection != blank %}
+          {% for product in collection.products limit: limit %}
+            <div class="bestsellers__slider-item">
+              {% render 'product-card', product: product, show_quick_view: true %}
+            </div>
+          {% endfor %}
+        {% else %}
+          {% for i in (1..limit) %}
+            <div class="bestsellers__slider-item">
+              {% render 'product-card-placeholder' %}
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+
+      <button type="button" class="bestsellers__arrow bestsellers__arrow--next" data-best-next aria-label="Next products">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    {% if section.settings.show_view_all and collection != blank %}
+      <div class="section__footer">
+        <a href="{{ collection.url }}" class="btn btn--secondary">
+          View All Bestsellers
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Bestsellers",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Our Bestsellers"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Most loved pieces by our customers"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 2,
+      "max": 16,
+      "step": 1,
+      "default": 8
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "Columns",
+      "options": [
+        { "value": "2", "label": "2" },
+        { "value": "3", "label": "3" },
+        { "value": "4", "label": "4" }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tabs",
+      "label": "Show category tabs",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "Show view all button",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Category Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Tab title",
+          "default": "Necklaces"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Bestsellers",
+      "blocks": [
+        { "type": "tab", "settings": { "title": "Necklaces" } },
+        { "type": "tab", "settings": { "title": "Bracelets" } },
+        { "type": "tab", "settings": { "title": "Earrings" } },
+        { "type": "tab", "settings": { "title": "Rings" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

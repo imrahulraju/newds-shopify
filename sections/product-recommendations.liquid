@@ -1,0 +1,127 @@
+<section class="product-recommendations section" id="product-recommendations-{{ section.id }}" data-product-recommendations>
+  <div class="container">
+    {% if section.settings.title != blank %}
+      <div class="section__header">
+        <h2 class="section__title">{{ section.settings.title }}</h2>
+      </div>
+    {% endif %}
+
+    {%- assign limit_count = section.settings.products_to_show | default: 8 -%}
+    {%- assign rec_collection = collection -%}
+    {%- if rec_collection == blank or rec_collection.handle == 'all' or rec_collection.handle == 'frontpage' -%}
+      {%- assign rec_collection = product.collections.first -%}
+    {%- endif -%}
+    {%- if rec_collection == blank -%}
+      {%- assign rec_collection = collections.all -%}
+    {%- endif -%}
+
+    <div class="product-recommendations__slider-wrapper">
+      <button type="button" class="product-recommendations__arrow product-recommendations__arrow--prev" data-rec-prev aria-label="Previous recommendations">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+      <div class="product-recommendations__slider" data-rec-slider>
+        {%- assign shown_count = 0 -%}
+
+        {%- if recommendations.performed and recommendations.products.size > 0 -%}
+          {% for rec_prod in recommendations.products limit: limit_count %}
+            <div class="product-recommendations__slide">
+              {% render 'product-card', product: rec_prod %}
+            </div>
+          {% endfor %}
+        {%- else -%}
+          {% for rec_prod in rec_collection.products %}
+            {% unless rec_prod.id == product.id %}
+              <div class="product-recommendations__slide">
+                {% render 'product-card', product: rec_prod %}
+              </div>
+              {% assign shown_count = shown_count | plus: 1 %}
+              {% if shown_count >= limit_count %}
+                {% break %}
+              {% endif %}
+            {% endunless %}
+          {% endfor %}
+
+          {% if shown_count < limit_count %}
+            {% for rec_prod in collections.all.products %}
+              {% unless rec_prod.id == product.id or rec_collection.products contains rec_prod %}
+                <div class="product-recommendations__slide">
+                  {% render 'product-card', product: rec_prod %}
+                </div>
+                {% assign shown_count = shown_count | plus: 1 %}
+                {% if shown_count >= limit_count %}
+                  {% break %}
+                {% endif %}
+              {% endunless %}
+            {% endfor %}
+          {% endif %}
+        {%- endif -%}
+      </div>
+
+      <button type="button" class="product-recommendations__arrow product-recommendations__arrow--next" data-rec-next aria-label="Next recommendations">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    function initRecSlider() {
+      const section = document.getElementById('product-recommendations-{{ section.id }}');
+      if (!section) return;
+
+      const slider = section.querySelector('[data-rec-slider]');
+      const prevBtn = section.querySelector('[data-rec-prev]');
+      const nextBtn = section.querySelector('[data-rec-next]');
+      if (!slider) return;
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          const slideWidth = slider.querySelector('.product-recommendations__slide')?.offsetWidth || 300;
+          slider.scrollBy({ left: -(slideWidth * 2), behavior: 'smooth' });
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          const slideWidth = slider.querySelector('.product-recommendations__slide')?.offsetWidth || 300;
+          slider.scrollBy({ left: slideWidth * 2, behavior: 'smooth' });
+        });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initRecSlider);
+    } else {
+      initRecSlider();
+    }
+  })();
+</script>
+
+{% schema %}
+{
+  "name": "Product Recommendations",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "You May Also Like"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 4,
+      "max": 12,
+      "step": 1,
+      "default": 8
+    }
+  ]
+}
+{% endschema %}

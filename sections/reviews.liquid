@@ -1,0 +1,178 @@
+<section class="reviews section" style="background-color: {{ section.settings.bg_color }};">
+  <div class="container">
+    {% if section.settings.title != blank %}
+      <div class="section__header">
+        {% if section.settings.subtitle != blank %}
+          <p class="section__subtitle">{{ section.settings.subtitle }}</p>
+        {% endif %}
+        <h2 class="section__title">{{ section.settings.title }}</h2>
+      </div>
+    {% endif %}
+
+    {% if section.settings.show_overall_rating %}
+      <div class="reviews__overall">
+        <div class="reviews__stars">
+          {% render 'star-rating', rating: section.settings.overall_rating %}
+        </div>
+        <p class="reviews__rating-text">
+          {{ section.settings.overall_rating }} / 5 based on {{ section.settings.review_count }} reviews
+        </p>
+      </div>
+    {% endif %}
+
+    <div class="reviews__slider" data-reviews-slider>
+      {% for block in section.blocks %}
+        <div class="reviews__card" {{ block.shopify_attributes }}>
+          <div class="reviews__card-stars">
+            {% render 'star-rating', rating: block.settings.rating %}
+          </div>
+          {% if block.settings.text != blank %}
+            <p class="reviews__card-text">"{{ block.settings.text }}"</p>
+          {% endif %}
+          <div class="reviews__card-author">
+            {% if block.settings.author_image != blank %}
+              <img 
+                src="{{ block.settings.author_image | image_url: width: 60 }}"
+                alt="{{ block.settings.author }}"
+                width="60"
+                height="60"
+                class="reviews__card-avatar"
+                loading="lazy"
+              >
+            {% endif %}
+            <div class="reviews__card-info">
+              <p class="reviews__card-name">{{ block.settings.author }}</p>
+              {% if block.settings.verified %}
+                <p class="reviews__card-verified">Verified Buyer</p>
+              {% endif %}
+            </div>
+          </div>
+          {% if block.settings.product_image != blank %}
+            <div class="reviews__card-product">
+              <img 
+                src="{{ block.settings.product_image | image_url: width: 80 }}"
+                alt="Product"
+                width="80"
+                height="80"
+                loading="lazy"
+                class="reviews__card-product-img"
+              >
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="reviews__nav">
+      <button class="reviews__arrow reviews__arrow--prev" data-reviews-prev aria-label="Previous review">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <button class="reviews__arrow reviews__arrow--next" data-reviews-next aria-label="Next review">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Reviews",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "ElyvaraCo"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "What our customers are saying"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_overall_rating",
+      "label": "Show overall rating",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "overall_rating",
+      "label": "Overall rating",
+      "default": "4.9"
+    },
+    {
+      "type": "text",
+      "id": "review_count",
+      "label": "Total reviews",
+      "default": "2,847"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#F9F7F4"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "range",
+          "id": "rating",
+          "label": "Rating",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Review text",
+          "default": "Super happy with my order, definitely worth it."
+        },
+        {
+          "type": "text",
+          "id": "author",
+          "label": "Author name",
+          "default": "Savanna Chan"
+        },
+        {
+          "type": "image_picker",
+          "id": "author_image",
+          "label": "Author image"
+        },
+        {
+          "type": "checkbox",
+          "id": "verified",
+          "label": "Verified buyer",
+          "default": true
+        },
+        {
+          "type": "image_picker",
+          "id": "product_image",
+          "label": "Product image (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Reviews",
+      "blocks": [
+        { "type": "review", "settings": { "text": "Super happy with my order, definitely worth it.", "author": "Savanna Chan" } },
+        { "type": "review", "settings": { "text": "Beautiful quality jewelry! I get compliments every time I wear them.", "author": "Emma Wilson" } },
+        { "type": "review", "settings": { "text": "The packaging was gorgeous and the pieces are even more stunning in person.", "author": "Sarah Miller" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
