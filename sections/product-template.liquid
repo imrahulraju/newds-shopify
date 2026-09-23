@@ -15,9 +15,17 @@
               height="800"
               class="product-template__image"
               id="product-main-img"
+              onerror="this.onerror=null; this.src='{{ 'sample-product-1.jpg' | asset_url }}';"
             >
           {% else %}
-            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            <img 
+              src="{{ 'sample-product-1.jpg' | asset_url }}"
+              alt="{{ product.title | default: 'Fine Jewelry' }}"
+              width="800"
+              height="800"
+              class="product-template__image"
+              id="product-main-img"
+            >
           {% endif %}
         </div>
         {% if product.images.size > 1 %}

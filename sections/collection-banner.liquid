@@ -1,18 +1,28 @@
 <section class="collection-banner">
   {%- assign banner_image = collection.image | default: section.settings.bg_image -%}
-  {% if banner_image != blank %}
-    <div class="collection-banner__image-wrapper">
+  <div class="collection-banner__image-wrapper">
+    {% if banner_image != blank %}
       <img 
         src="{{ banner_image | image_url: width: 1920 }}"
-        alt="{{ collection.title }}"
+        alt="{{ collection.title | default: 'Collection' }}"
+        width="1920"
+        height="400"
+        class="collection-banner__image"
+        loading="eager"
+        onerror="this.onerror=null; this.src='{{ 'sample-collection-banner.jpg' | asset_url }}';"
+      >
+    {% else %}
+      <img 
+        src="{{ 'sample-collection-banner.jpg' | asset_url }}"
+        alt="{{ collection.title | default: 'Collection' }}"
         width="1920"
         height="400"
         class="collection-banner__image"
         loading="eager"
       >
-      <div class="collection-banner__overlay" style="opacity: {{ section.settings.overlay_opacity | default: 40 | divided_by: 100.0 }};"></div>
-    </div>
-  {% endif %}
+    {% endif %}
+    <div class="collection-banner__overlay" style="opacity: {{ section.settings.overlay_opacity | default: 40 | divided_by: 100.0 }};"></div>
+  </div>
   <div class="container">
     <div class="collection-banner__content">
       <h1 class="collection-banner__title">{{ collection.title }}</h1>

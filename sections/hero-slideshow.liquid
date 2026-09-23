@@ -12,6 +12,12 @@
                           {{ block.settings.mobile_image | image_url: width: 768 }} 768w"
                   sizes="100vw"
                 >
+              {% else %}
+                <source 
+                  media="(max-width: 768px)" 
+                  srcset="{{ 'ChatGPT_Image_Aug_20_2026_11_49_23_PM.png' | asset_url }}"
+                  sizes="100vw"
+                >
               {% endif %}
               <img 
                 src="{{ block.settings.image | image_url: width: 1920 }}"
@@ -19,17 +25,30 @@
                         {{ block.settings.image | image_url: width: 1200 }} 1200w,
                         {{ block.settings.image | image_url: width: 1920 }} 1920w"
                 sizes="100vw"
-                alt="{{ block.settings.image.alt | default: block.settings.heading }}"
+                alt="{{ block.settings.image.alt | default: block.settings.heading | default: 'Elyvara Fine Jewelry' }}"
+                width="1920"
+                height="1080"
+                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                class="hero-slideshow__image"
+                onerror="this.onerror=null; this.src='{{ 'Frame_1_1.png' | asset_url }}';"
+              >
+            </picture>
+          {% else %}
+            <picture>
+              <source 
+                media="(max-width: 768px)" 
+                srcset="{{ 'ChatGPT_Image_Aug_20_2026_11_49_23_PM.png' | asset_url }}"
+                sizes="100vw"
+              >
+              <img 
+                src="{{ 'Frame_1_1.png' | asset_url }}"
+                alt="Elyvara Fine Jewelry"
                 width="1920"
                 height="1080"
                 loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
                 class="hero-slideshow__image"
               >
             </picture>
-          {% else %}
-            <div class="hero-slideshow__placeholder">
-              {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
-            </div>
           {% endif %}
         </div>
 

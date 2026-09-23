@@ -95,7 +95,7 @@
   }
 </style>
 
-<section class="free-gift-promo section{% if section.settings.bg_image != blank %} has-bg-image{% endif %}" style="{% if section.settings.bg_image != blank %}background-image: url('{{ section.settings.bg_image | image_url: width: 2000 }}');{% elsif section.settings.bg_color != blank %}background-color: {{ section.settings.bg_color }};{% endif %}">
+<section class="free-gift-promo section{% if section.settings.bg_image != blank %} has-bg-image{% endif %}" style="{% if section.settings.bg_image != blank %}background-image: url('{{ section.settings.bg_image | image_url: width: 2000 }}'), url('{{ 'File_258_2.webp' | asset_url }}');{% elsif section.settings.bg_color != blank %}background-color: {{ section.settings.bg_color }};{% endif %}">
   {% if section.settings.bg_image != blank and section.settings.bg_overlay_opacity > 0 %}
     <div class="section-bg-overlay" style="background-color: {{ section.settings.bg_overlay_color | default: '#ffffff' }}; opacity: {{ section.settings.bg_overlay_opacity | divided_by: 100.0 }};"></div>
   {% endif %}
@@ -113,11 +113,19 @@
             height="300"
             loading="lazy"
             class="free-gift-promo__image"
+            onerror="this.onerror=null; this.src='{{ 'WhatsApp_Image_2026-07-19_at_7.40.25_AM_1.png' | asset_url }}';"
           >
         </div>
       {% else %}
-        <div class="free-gift-promo__placeholder">
-          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        <div class="free-gift-promo__media">
+          <img 
+            src="{{ 'WhatsApp_Image_2026-07-19_at_7.40.25_AM_1.png' | asset_url }}"
+            alt="{{ section.settings.title | default: 'Free Gift' }}"
+            width="300"
+            height="300"
+            loading="lazy"
+            class="free-gift-promo__image"
+          >
         </div>
       {% endif %}
 

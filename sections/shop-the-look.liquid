@@ -1,4 +1,4 @@
-<section class="shop-the-look section{% if section.settings.bg_image != blank %} has-bg-image{% endif %}" id="stl-{{ section.id }}" style="{% if section.settings.bg_image != blank %}background-image: url('{{ section.settings.bg_image | image_url: width: 2000 }}');{% elsif section.settings.bg_color != blank %}background-color: {{ section.settings.bg_color }};{% endif %}">
+<section class="shop-the-look section{% if section.settings.bg_image != blank %} has-bg-image{% endif %}" id="stl-{{ section.id }}" style="{% if section.settings.bg_image != blank %}background-image: url('{{ section.settings.bg_image | image_url: width: 2000 }}'), url('{{ '37_3.webp' | asset_url }}');{% elsif section.settings.bg_color != blank %}background-color: {{ section.settings.bg_color }};{% endif %}">
   {% if section.settings.bg_image != blank and section.settings.bg_overlay_opacity > 0 %}
     <div class="section-bg-overlay" style="background-color: {{ section.settings.bg_overlay_color | default: '#ffffff' }}; opacity: {{ section.settings.bg_overlay_opacity | divided_by: 100.0 }};"></div>
   {% endif %}
@@ -27,11 +27,15 @@
             alt="{{ section.settings.title | default: 'Shop the Look' }}"
             class="shop-the-look__image"
             loading="lazy"
+            onerror="this.onerror=null; this.src='{{ 'File_258_2.webp' | asset_url }}';"
           >
         {% else %}
-          <div class="shop-the-look__placeholder">
-            {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
-          </div>
+          <img 
+            src="{{ 'File_258_2.webp' | asset_url }}" 
+            alt="{{ section.settings.title | default: 'Shop the Look' }}"
+            class="shop-the-look__image"
+            loading="lazy"
+          >
         {% endif %}
 
         <!-- Hotspot dots -->
@@ -85,17 +89,27 @@
             <div class="shop-the-look__slide {% if forloop.first %}is-active{% endif %}" data-stl-slide-index="{{ forloop.index0 }}">
               <div class="shop-the-look__product-card">
                 <a href="{{ prod_url }}" class="shop-the-look__product-img-link">
+                  {%- case forloop.index -%}
+                    {%- when 1 -%}{%- assign stl_sample_img = 'Eye_of_Grace_BANGLE_Variant_View_Gold_Silver..webp' -%}
+                    {%- when 2 -%}{%- assign stl_sample_img = 'billi_EAR_CUFF.webp' -%}
+                    {%- when 3 -%}{%- assign stl_sample_img = 'sample-product-5.jpg' -%}
+                    {%- else -%}{%- assign stl_sample_img = 'sample-product-1.jpg' -%}
+                  {%- endcase -%}
                   {% if prod.featured_image != blank %}
                     <img 
                       src="{{ prod.featured_image | image_url: width: 400 }}" 
                       alt="{{ prod_title }}"
                       class="shop-the-look__product-img"
                       loading="lazy"
+                      onerror="this.onerror=null; this.src='{{ stl_sample_img | asset_url }}';"
                     >
                   {% else %}
-                    <div class="shop-the-look__product-placeholder">
-                      {{ 'product-' | append: forloop.index | placeholder_svg_tag: 'placeholder-svg' }}
-                    </div>
+                    <img 
+                      src="{{ stl_sample_img | asset_url }}" 
+                      alt="{{ prod_title }}"
+                      class="shop-the-look__product-img"
+                      loading="lazy"
+                    >
                   {% endif %}
                 </a>
                 <div class="shop-the-look__product-info">

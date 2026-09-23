@@ -175,9 +175,17 @@
               height="auto"
               class="header__logo-img"
               loading="eager"
+              onerror="this.onerror=null; this.src='{{ 'logo.png' | asset_url }}';"
             >
           {% else %}
-            <span class="header__logo-text">{{ shop.name }}</span>
+            <img 
+              src="{{ 'logo.png' | asset_url }}" 
+              alt="{{ shop.name }}"
+              width="200"
+              height="auto"
+              class="header__logo-img"
+              loading="eager"
+            >
           {% endif %}
         </a>
       </div>
@@ -261,9 +269,16 @@
             class="mobile-menu__logo-img"
             width="200"
             loading="lazy"
+            onerror="this.onerror=null; this.src='{{ 'logo.png' | asset_url }}';"
           >
         {% else %}
-          <span class="mobile-menu__logo-text">{{ shop.name }}</span>
+          <img
+            src="{{ 'logo.png' | asset_url }}"
+            alt="{{ shop.name }}"
+            class="mobile-menu__logo-img"
+            width="200"
+            loading="lazy"
+          >
         {% endif %}
       </a>
 

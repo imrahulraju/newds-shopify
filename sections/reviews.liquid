@@ -1,4 +1,4 @@
-<section class="reviews section{% if section.settings.bg_image != blank %} has-bg-image{% endif %}" style="{% if section.settings.bg_image != blank %}background-image: url('{{ section.settings.bg_image | image_url: width: 2000 }}');{% elsif section.settings.bg_color != blank %}background-color: {{ section.settings.bg_color }};{% endif %}">
+<section class="reviews section{% if section.settings.bg_image != blank %} has-bg-image{% endif %}" style="{% if section.settings.bg_image != blank %}background-image: url('{{ section.settings.bg_image | image_url: width: 2000 }}'), url('{{ 'File_258_2.webp' | asset_url }}');{% elsif section.settings.bg_color != blank %}background-color: {{ section.settings.bg_color }};{% endif %}">
   {% if section.settings.bg_image != blank and section.settings.bg_overlay_opacity > 0 %}
     <div class="section-bg-overlay" style="background-color: {{ section.settings.bg_overlay_color | default: '#ffffff' }}; opacity: {{ section.settings.bg_overlay_opacity | divided_by: 100.0 }};"></div>
   {% endif %}
@@ -32,11 +32,24 @@
           {% if block.settings.text != blank %}
             <p class="reviews__card-text">"{{ block.settings.text }}"</p>
           {% endif %}
+          {%- assign rev_num = forloop.index | default: 1 | modulo: 3 | plus: 1 -%}
+          {%- assign sample_av = 'sample-avatar-' | append: rev_num | append: '.jpg' -%}
+          {%- assign sample_prod = 'sample-product-' | append: rev_num | append: '.jpg' -%}
           <div class="reviews__card-author">
             {% if block.settings.author_image != blank %}
               <img 
                 src="{{ block.settings.author_image | image_url: width: 60 }}"
-                alt="{{ block.settings.author }}"
+                alt="{{ block.settings.author | default: 'Reviewer' }}"
+                width="60"
+                height="60"
+                class="reviews__card-avatar"
+                loading="lazy"
+                onerror="this.onerror=null; this.src='{{ sample_av | asset_url }}';"
+              >
+            {% else %}
+              <img 
+                src="{{ sample_av | asset_url }}"
+                alt="{{ block.settings.author | default: 'Reviewer' }}"
                 width="60"
                 height="60"
                 class="reviews__card-avatar"
@@ -54,6 +67,18 @@
             <div class="reviews__card-product">
               <img 
                 src="{{ block.settings.product_image | image_url: width: 80 }}"
+                alt="Product"
+                width="80"
+                height="80"
+                loading="lazy"
+                class="reviews__card-product-img"
+                onerror="this.onerror=null; this.src='{{ sample_prod | asset_url }}';"
+              >
+            </div>
+          {% else %}
+            <div class="reviews__card-product">
+              <img 
+                src="{{ sample_prod | asset_url }}"
                 alt="Product"
                 width="80"
                 height="80"
