@@ -32,7 +32,7 @@
       "header": {
         "type": "header",
         "custom_css": [
-          ".header__logo-img {height: 34px; width: auto;}",
+          ".header__logo-img {height: 24px; width: auto;}",
           ".header {background: #fef9f9;}"
         ],
         "settings": {
