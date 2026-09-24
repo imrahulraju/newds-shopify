@@ -25,7 +25,7 @@
                         {{ block.settings.image | image_url: width: 1200 }} 1200w,
                         {{ block.settings.image | image_url: width: 1920 }} 1920w"
                 sizes="100vw"
-                alt="{{ block.settings.image.alt | default: block.settings.heading | default: 'Elyvara Fine Jewelry' }}"
+                alt="{{ block.settings.image.alt | default: block.settings.heading | default: 'Newds.Co Luxury Jewellery' }}"
                 width="1920"
                 height="1080"
                 loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
@@ -37,12 +37,12 @@
             <picture>
               <source 
                 media="(max-width: 768px)" 
-                srcset="{{ 'ChatGPT_Image_Aug_20_2026_11_49_23_PM.png' | asset_url }}"
+                srcset="{{ 'sample-hero-mobile.jpg' | asset_url }}"
                 sizes="100vw"
               >
               <img 
                 src="{{ 'Frame_1_1.png' | asset_url }}"
-                alt="Elyvara Fine Jewelry"
+                alt="Newds.Co Luxury Jewellery"
                 width="1920"
                 height="1080"
                 loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"

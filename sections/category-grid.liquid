@@ -26,23 +26,23 @@
               <div class="category-grid__image-wrapper">
                 {%- assign cat_title = block.settings.title | downcase -%}
                 {%- if cat_title contains 'earring' -%}
-                  {%- assign sample_cat_img = 'Loma_Studs_Earring.webp' -%}
+                  {%- assign sample_cat_img = 'sample-category-earrings.jpg' -%}
                 {%- elsif cat_title contains 'neck' -%}
-                  {%- assign sample_cat_img = 'Lily_Clover_Necklace_Bracelet_Set_Front_View..webp' -%}
+                  {%- assign sample_cat_img = 'sample-category-necklace.jpg' -%}
                 {%- elsif cat_title contains 'ring' -%}
-                  {%- assign sample_cat_img = 'billi_EAR_CUFF.webp' -%}
-                {%- elsif cat_title contains 'bracelet' or cat_title contains 'bangle' -%}
-                  {%- assign sample_cat_img = 'Eye_of_Grace_BANGLE_Variant_View_Gold_Silver..webp' -%}
-                {%- elsif cat_title contains 'access' -%}
-                  {%- assign sample_cat_img = 'IMG-20250731-WA0021.webp' -%}
+                  {%- assign sample_cat_img = 'sample-category-rings.jpg' -%}
+                {%- elsif cat_title contains 'bracelet' or cat_title contains 'bangle' or cat_title contains 'wrist' -%}
+                  {%- assign sample_cat_img = 'sample-category-bracelets.jpg' -%}
+                {%- elsif cat_title contains 'access' or cat_title contains 'anklet' -%}
+                  {%- assign sample_cat_img = 'sample-category-accessories.jpg' -%}
                 {%- else -%}
                   {%- assign sample_cat_idx = forloop.index | default: 1 | modulo: 5 | plus: 1 -%}
                   {%- case sample_cat_idx -%}
-                    {%- when 1 -%}{%- assign sample_cat_img = 'Loma_Studs_Earring.webp' -%}
-                    {%- when 2 -%}{%- assign sample_cat_img = 'Lily_Clover_Necklace_Bracelet_Set_Front_View..webp' -%}
-                    {%- when 3 -%}{%- assign sample_cat_img = 'billi_EAR_CUFF.webp' -%}
-                    {%- when 4 -%}{%- assign sample_cat_img = 'Eye_of_Grace_BANGLE_Variant_View_Gold_Silver..webp' -%}
-                    {%- else -%}{%- assign sample_cat_img = 'IMG-20250731-WA0021.webp' -%}
+                    {%- when 1 -%}{%- assign sample_cat_img = 'sample-category-earrings.jpg' -%}
+                    {%- when 2 -%}{%- assign sample_cat_img = 'sample-category-necklace.jpg' -%}
+                    {%- when 3 -%}{%- assign sample_cat_img = 'sample-category-rings.jpg' -%}
+                    {%- when 4 -%}{%- assign sample_cat_img = 'sample-category-bracelets.jpg' -%}
+                    {%- else -%}{%- assign sample_cat_img = 'sample-category-accessories.jpg' -%}
                   {%- endcase -%}
                 {%- endif -%}
                 {% if block.settings.image != blank %}
@@ -198,10 +198,11 @@
     {
       "name": "Category Grid",
       "blocks": [
-        { "type": "category", "settings": { "title": "Necklaces" } },
         { "type": "category", "settings": { "title": "Bracelets" } },
-        { "type": "category", "settings": { "title": "Earrings" } },
         { "type": "category", "settings": { "title": "Rings" } },
+        { "type": "category", "settings": { "title": "Neck Chains" } },
+        { "type": "category", "settings": { "title": "Earrings" } },
+        { "type": "category", "settings": { "title": "Wrist Bands" } },
         { "type": "category", "settings": { "title": "Anklets" } }
       ]
     }
