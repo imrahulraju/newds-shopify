@@ -1,4 +1,4 @@
-<section class="category-grid section{% if section.settings.bg_image != blank %} has-bg-image{% endif %}" style="{% if section.settings.bg_image != blank %}background-image: url('{{ section.settings.bg_image | image_url: width: 2000 }}');{% elsif section.settings.bg_color != blank %}background-color: {{ section.settings.bg_color }};{% endif %}">
+<section class="category-grid section{% if section.settings.bg_image != blank %} has-bg-image{% endif %}" style="{% if section.settings.bg_image != blank %}background-image: url('{{ section.settings.bg_image | image_url: width: 2000 }}'), url('{{ '2150347075.jpg' | asset_url }}');{% elsif section.settings.bg_color != blank %}background-color: {{ section.settings.bg_color }};{% endif %}">
   {% if section.settings.bg_image != blank and section.settings.bg_overlay_opacity > 0 %}
     <div class="section-bg-overlay" style="background-color: {{ section.settings.bg_overlay_color | default: '#ffffff' }}; opacity: {{ section.settings.bg_overlay_opacity | divided_by: 100.0 }};"></div>
   {% endif %}
@@ -24,22 +24,49 @@
           <div class="category-grid__slider-item" {{ block.shopify_attributes }}>
             <a href="{{ block.settings.link | default: '#' }}" class="category-grid__item">
               <div class="category-grid__image-wrapper">
+                {%- assign cat_title = block.settings.title | downcase -%}
+                {%- if cat_title contains 'earring' -%}
+                  {%- assign sample_cat_img = 'sample-category-earrings.jpg' -%}
+                {%- elsif cat_title contains 'neck' -%}
+                  {%- assign sample_cat_img = 'sample-category-necklace.jpg' -%}
+                {%- elsif cat_title contains 'ring' -%}
+                  {%- assign sample_cat_img = 'sample-category-rings.jpg' -%}
+                {%- elsif cat_title contains 'bracelet' or cat_title contains 'bangle' or cat_title contains 'wrist' -%}
+                  {%- assign sample_cat_img = 'sample-category-bracelets.jpg' -%}
+                {%- elsif cat_title contains 'access' or cat_title contains 'anklet' -%}
+                  {%- assign sample_cat_img = 'sample-category-accessories.jpg' -%}
+                {%- else -%}
+                  {%- assign sample_cat_idx = forloop.index | default: 1 | modulo: 5 | plus: 1 -%}
+                  {%- case sample_cat_idx -%}
+                    {%- when 1 -%}{%- assign sample_cat_img = 'sample-category-earrings.jpg' -%}
+                    {%- when 2 -%}{%- assign sample_cat_img = 'sample-category-necklace.jpg' -%}
+                    {%- when 3 -%}{%- assign sample_cat_img = 'sample-category-rings.jpg' -%}
+                    {%- when 4 -%}{%- assign sample_cat_img = 'sample-category-bracelets.jpg' -%}
+                    {%- else -%}{%- assign sample_cat_img = 'sample-category-accessories.jpg' -%}
+                  {%- endcase -%}
+                {%- endif -%}
                 {% if block.settings.image != blank %}
                   <img 
                     src="{{ block.settings.image | image_url: width: 400 }}"
                     srcset="{{ block.settings.image | image_url: width: 300 }} 300w,
                             {{ block.settings.image | image_url: width: 400 }} 400w"
                     sizes="(max-width: 768px) 50vw, 20vw"
-                    alt="{{ block.settings.title }}"
+                    alt="{{ block.settings.title | default: 'Category' }}"
+                    width="400"
+                    height="400"
+                    loading="lazy"
+                    class="category-grid__image"
+                    onerror="this.onerror=null; this.src='{{ sample_cat_img | asset_url }}';"
+                  >
+                {% else %}
+                  <img 
+                    src="{{ sample_cat_img | asset_url }}"
+                    alt="{{ block.settings.title | default: 'Category' }}"
                     width="400"
                     height="400"
                     loading="lazy"
                     class="category-grid__image"
                   >
-                {% else %}
-                  <div class="category-grid__placeholder">
-                    {{ 'collection-1' | placeholder_svg_tag: 'placeholder-svg' }}
-                  </div>
                 {% endif %}
               </div>
               {% if block.settings.title != blank %}
@@ -171,10 +198,11 @@
     {
       "name": "Category Grid",
       "blocks": [
-        { "type": "category", "settings": { "title": "Necklaces" } },
         { "type": "category", "settings": { "title": "Bracelets" } },
-        { "type": "category", "settings": { "title": "Earrings" } },
         { "type": "category", "settings": { "title": "Rings" } },
+        { "type": "category", "settings": { "title": "Neck Chains" } },
+        { "type": "category", "settings": { "title": "Earrings" } },
+        { "type": "category", "settings": { "title": "Wrist Bands" } },
         { "type": "category", "settings": { "title": "Anklets" } }
       ]
     }

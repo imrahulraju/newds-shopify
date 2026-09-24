@@ -7,7 +7,7 @@
   {%- assign display_currency = 'USD' -%}
 {%- endif -%}
 
-<footer class="ftr{% if section.settings.bg_image != blank %} has-bg-image{% endif %}" style="{% if section.settings.bg_image != blank %}background-image: url('{{ section.settings.bg_image | image_url: width: 2000 }}'); background-size: cover; background-position: center; position: relative;{% elsif section.settings.bg_color != blank %}background-color: {{ section.settings.bg_color }};{% endif %}">
+<footer class="ftr{% if section.settings.bg_image != blank %} has-bg-image{% endif %}" style="{% if section.settings.bg_image != blank %}background-image: url('{{ section.settings.bg_image | image_url: width: 2000 }}'), url('{{ 'File_258_2.webp' | asset_url }}'); background-size: cover; background-position: center; position: relative;{% elsif section.settings.bg_color != blank %}background-color: {{ section.settings.bg_color }};{% endif %}">
   {% if section.settings.bg_image != blank and section.settings.bg_overlay_opacity > 0 %}
     <div class="section-bg-overlay" style="background-color: {{ section.settings.bg_overlay_color | default: '#000000' }}; opacity: {{ section.settings.bg_overlay_opacity | divided_by: 100.0 }};"></div>
   {% endif %}
@@ -17,8 +17,8 @@
     <span class="ftr__divider-line"></span>
     <span class="ftr__divider-gem" aria-hidden="true">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-        <path d="M12 2L2 9l10 13L22 9 12 2z" stroke="#c9a84c" stroke-width="1.4" fill="none" stroke-linejoin="round"/>
-        <path d="M2 9h20M7 9L12 2M17 9L12 2M7 9l5 13M17 9l-5 13" stroke="#c9a84c" stroke-width="1" stroke-linejoin="round"/>
+        <path d="M12 2L2 9l10 13L22 9 12 2z" stroke="#8D7865" stroke-width="1.4" fill="none" stroke-linejoin="round"/>
+        <path d="M2 9h20M7 9L12 2M17 9L12 2M7 9l5 13M17 9l-5 13" stroke="#8D7865" stroke-width="1" stroke-linejoin="round"/>
       </svg>
     </span>
     <span class="ftr__divider-line"></span>

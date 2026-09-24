@@ -9,22 +9,22 @@
  */
 {
   "current": {
-    "color_primary": "#C9A96E",
-    "color_secondary": "#F5F0EB",
-    "color_accent": "#D4AF37",
-    "color_text": "#333333",
+    "color_primary": "#8D7865",
+    "color_secondary": "#F9F8F7",
+    "color_accent": "#7A6856",
+    "color_text": "#2C2C2C",
     "color_text_light": "#666666",
-    "color_heading": "#1a1a1a",
+    "color_heading": "#8D7865",
     "color_background": "#FFFFFF",
-    "color_background_alt": "#F9F7F4",
-    "color_button": "#cb9635",
+    "color_background_alt": "#F8F7F6",
+    "color_button": "#1A1A1A",
     "color_button_text": "#FFFFFF",
-    "category_1_name": "Necklaces",
-    "category_2_name": "Bracelets",
-    "category_3_name": "Earrings",
-    "category_4_name": "Rings",
-    "category_5_name": "Anklets",
-    "category_6_name": "Gift Sets",
+    "category_1_name": "Bracelets",
+    "category_2_name": "Rings",
+    "category_3_name": "Neck Chains",
+    "category_4_name": "Earrings",
+    "category_5_name": "Wrist Bands",
+    "category_6_name": "Anklets",
     "cart_type": "drawer",
     "cart_show_free_shipping": true,
     "cart_free_shipping_threshold": "75",
@@ -32,26 +32,26 @@
       "header": {
         "type": "header",
         "custom_css": [
-          ".header__logo-img {height: 74px; width: auto;}",
+          ".header__logo-img {height: 24px; width: auto;}",
           ".header {background: #fef9f9;}"
         ],
         "settings": {
-          "logo": "shopify://shop_images/image_2_1.png",
+          "logo": "shopify://shop_images/logo-newds.svg",
           "logo_width": 80,
-          "menu": "main-menu-v2",
+          "menu": "",
           "sticky_header": true
         }
       },
       "footer": {
         "type": "footer",
         "settings": {
-          "brand_title": "ELYVARACO",
-          "brand_tagline": "Timeless elegance, crafted for you.",
-          "brand_desc": "Discover curated collections of ethically sourced, artisanal fine jewelry. Each piece tells a story of timeless beauty.",
-          "contact_email": "info@elyvaraco.com",
+          "brand_title": "NEWDS.CO",
+          "brand_tagline": "Luxury Jewellery for the Modern You",
+          "brand_desc": "Explore our modern, waterproof, hypoallergenic, and everyday luxury jewellery collections.",
+          "contact_email": "support@newds.co.in",
           "menu_left": "",
           "show_payment_icons": true,
-          "bg_image": "shopify://shop_images/File_258_2.webp",
+          "bg_color": "",
           "bg_overlay_opacity": 75,
           "bg_overlay_color": "#0f0f0f"
         }
@@ -60,10 +60,12 @@
         "type": "announcement-bar",
         "settings": {
           "show_announcement": true,
-          "text": "Free U.S. Shipping on Orders Over $100 🇺🇸",
+          "text": "LUXURY JEWELLERY FOR THE MODERN YOU • FREE SHIPPING OVER ₹999",
           "link": "",
           "bg_color": "#f5f0eb",
-          "text_color": "#333333"
+          "text_color": "#333333",
+          "bg_overlay_opacity": 10,
+          "bg_overlay_color": "#000000"
         }
       },
       "list-collections-template": {
@@ -73,7 +75,7 @@
       "collection-banner": {
         "type": "collection-banner",
         "settings": {
-          "bg_image": "shopify://shop_images/Frame_1_1.png",
+          "bg_image": "shopify://shop_images/image-836-1.png",
           "overlay_opacity": 35
         }
       },

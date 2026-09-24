@@ -11,16 +11,22 @@
             srcset="{{ section.settings.image | image_url: width: 500 }} 500w,
                     {{ section.settings.image | image_url: width: 800 }} 800w"
             sizes="(max-width: 768px) 100vw, 50vw"
-            alt="{{ section.settings.title }}"
+            alt="{{ section.settings.title | default: 'Gift Section' }}"
+            width="800"
+            height="600"
+            loading="lazy"
+            class="gift-section__image"
+            onerror="this.onerror=null; this.src='{{ 'sample-gift.jpg' | asset_url }}';"
+          >
+        {% else %}
+          <img 
+            src="{{ 'sample-gift.jpg' | asset_url }}"
+            alt="{{ section.settings.title | default: 'Gift Section' }}"
             width="800"
             height="600"
             loading="lazy"
             class="gift-section__image"
           >
-        {% else %}
-          <div class="gift-section__placeholder">
-            {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
-          </div>
         {% endif %}
       </div>
 

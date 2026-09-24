@@ -2,18 +2,52 @@
   Product Card Placeholder - shown when no collection is selected
 {% endcomment %}
 
+{%- assign sample_num = index | default: forloop.index | default: 1 | modulo: 8 | plus: 1 -%}
+{%- assign sample_img = 'sample-product-' | append: sample_num | append: '.jpg' -%}
+
 <div class="product-card product-card--placeholder">
   <div class="product-card__media">
-    <div class="product-card__placeholder">
-      {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
-    </div>
+    <a href="#" class="product-card__link">
+      <img 
+        src="{{ sample_img | asset_url }}"
+        alt="Jewelry Product"
+        width="480"
+        height="480"
+        loading="lazy"
+        class="product-card__image product-card__image--primary"
+      >
+    </a>
   </div>
   <div class="product-card__info">
     <h3 class="product-card__title">
-      <a href="#">Product Title</a>
+      <a href="#">
+        {%- case sample_num -%}
+          {%- when 1 -%}Lily Clover Necklace
+          {%- when 2 -%}Loma Gold Studs
+          {%- when 3 -%}Eye of Grace Bangle
+          {%- when 4 -%}Emerald Solitaire Ring
+          {%- when 5 -%}Classic Twist Ring
+          {%- when 6 -%}Pearl Drop Earrings
+          {%- when 7 -%}Solarose Gold Chain
+          {%- when 8 -%}Diamond Accent Bangle
+          {%- else -%}Fine Jewelry
+        {%- endcase -%}
+      </a>
     </h3>
     <div class="product-card__price">
-      <span class="product-card__price-regular">$29.99</span>
+      <span class="product-card__price-regular">
+        {%- case sample_num -%}
+          {%- when 1 -%}$49.00
+          {%- when 2 -%}$39.00
+          {%- when 3 -%}$59.00
+          {%- when 4 -%}$65.00
+          {%- when 5 -%}$45.00
+          {%- when 6 -%}$52.00
+          {%- when 7 -%}$69.00
+          {%- when 8 -%}$75.00
+          {%- else -%}$49.00
+        {%- endcase -%}
+      </span>
     </div>
   </div>
 </div>

@@ -26,6 +26,15 @@
                       width="120"
                       height="120"
                       loading="lazy"
+                      onerror="this.onerror=null; this.src='{{ 'sample-product-1.jpg' | asset_url }}';"
+                    >
+                  {% else %}
+                    <img 
+                      src="{{ 'sample-product-1.jpg' | asset_url }}"
+                      alt="{{ item.title | default: 'Product' }}"
+                      width="120"
+                      height="120"
+                      loading="lazy"
                     >
                   {% endif %}
                 </a>

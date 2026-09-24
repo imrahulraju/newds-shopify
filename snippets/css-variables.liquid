@@ -5,29 +5,30 @@
 <style>
   :root {
     /* Colors */
-    --color-primary: {{ settings.color_primary }};
-    --color-secondary: {{ settings.color_secondary }};
-    --color-accent: {{ settings.color_accent }};
-    --color-text: {{ settings.color_text }};
-    --color-text-light: {{ settings.color_text_light }};
-    --color-heading: {{ settings.color_heading }};
-    --color-background: {{ settings.color_background }};
-    --color-background-alt: {{ settings.color_background_alt }};
-    --color-button: {{ settings.color_button }};
-    --color-button-text: {{ settings.color_button_text }};
-    --color-border: #e8e8e8;
-    --color-star: #F5A623;
-    --color-success: #4CAF50;
+    --color-primary: {{ settings.color_primary | default: '#8D7865' }};
+    --color-secondary: {{ settings.color_secondary | default: '#F9F8F7' }};
+    --color-accent: {{ settings.color_accent | default: '#7A6856' }};
+    --color-text: {{ settings.color_text | default: '#2C2C2C' }};
+    --color-text-light: {{ settings.color_text_light | default: '#666666' }};
+    --color-heading: {{ settings.color_heading | default: '#8D7865' }};
+    --color-background: {{ settings.color_background | default: '#FFFFFF' }};
+    --color-background-alt: {{ settings.color_background_alt | default: '#F8F7F6' }};
+    --color-button: {{ settings.color_button | default: '#1A1A1A' }};
+    --color-button-text: {{ settings.color_button_text | default: '#FFFFFF' }};
+    --color-border: #F0EEEC;
+    --color-star: #8D7865;
+    --color-success: #2E7D32;
     --color-error: #E74C3C;
 
     /* Typography */
-    --font-heading: 'Cormorant Garamond', Georgia, serif;
+    --font-heading: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-heading-weight: 600;
     --font-heading-style: normal;
-    --font-body: 'Jost', system-ui, sans-serif;
+    --font-body: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-body-weight: 400;
     --font-body-style: normal;
-    --font-body-size: 15px;
+    --font-body-size: 14px;
+    --font-accent: 'Playfair Display', Georgia, serif;
 
     /* Spacing */
     --spacing-xs: 0.5rem;

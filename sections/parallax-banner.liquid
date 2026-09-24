@@ -11,11 +11,15 @@
         alt="{{ section.settings.heading | default: 'Parallax banner' }}"
         class="parallax-banner__bg-image"
         loading="lazy"
+        onerror="this.onerror=null; this.src='{{ 'File_258_2.webp' | asset_url }}';"
       >
     {% else %}
-      <div class="parallax-banner__placeholder">
-        {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
-      </div>
+      <img 
+        src="{{ 'File_258_2.webp' | asset_url }}"
+        alt="{{ section.settings.heading | default: 'Parallax banner' }}"
+        class="parallax-banner__bg-image"
+        loading="lazy"
+      >
     {% endif %}
   </div>
 
