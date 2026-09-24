@@ -91,6 +91,17 @@
   }
 </style>
 
+{%- assign header_menu = section.settings.menu -%}
+{%- if header_menu == blank or linklists[header_menu].links.size == 0 -%}
+  {%- if linklists['main-menu-v2'].links.size > 0 -%}
+    {%- assign header_menu = 'main-menu-v2' -%}
+  {%- elsif linklists['main-menu'].links.size > 0 -%}
+    {%- assign header_menu = 'main-menu' -%}
+  {%- else -%}
+    {%- assign header_menu = 'main-menu' -%}
+  {%- endif -%}
+{%- endif -%}
+
 <header class="header {% if section.settings.sticky_header %}header--sticky{% endif %}" data-header>
   <div class="container">
     <div class="header__inner">
@@ -104,7 +115,7 @@
       <!-- Navigation (Desktop) -->
       <nav class="header__nav" role="navigation" aria-label="Main navigation">
         <ul class="header__nav-list">
-          {% for link in linklists[section.settings.menu].links %}
+          {% for link in linklists[header_menu].links %}
             {%- assign is_catalog = false -%}
             {%- if link.url == '/collections/all' or link.title == 'Catalog' -%}
               {%- assign is_catalog = true -%}
@@ -294,7 +305,7 @@
 
       <nav class="mobile-menu__nav" role="navigation" aria-label="Mobile navigation">
         <ul class="mobile-menu__list">
-          {% for link in linklists[section.settings.menu].links %}
+          {% for link in linklists[header_menu].links %}
             {%- assign is_catalog = false -%}
             {%- if link.url == '/collections/all' or link.title == 'Catalog' -%}
               {%- assign is_catalog = true -%}
